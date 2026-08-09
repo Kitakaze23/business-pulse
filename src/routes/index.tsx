@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bell, ChevronRight, UserRound } from "lucide-react";
+import { Bell, ChevronRight, UserRound, Lightbulb, Rocket, Lock } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { pulse, insight, recommendations } from "@/lib/business-data";
 
@@ -52,6 +52,64 @@ function ScoreRing({ score }: { score: number }) {
   );
 }
 
+const levels = [
+  { name: "Новичок", state: "done" },
+  { name: "Молодой", state: "done" },
+  { name: "Развивающийся", state: "current" },
+  { name: "Зрелый", state: "locked" },
+] as const;
+
+function LevelProgress() {
+  const currentIndex = levels.findIndex((l) => l.state === "current");
+  const fill = (currentIndex / (levels.length - 1)) * 100;
+
+  return (
+    <div className="mt-6 border-t border-border pt-5">
+      <p className="text-xs text-muted-foreground">Ваш уровень бизнеса</p>
+      <div className="relative mt-6 px-1">
+        <div className="h-1.5 rounded-full bg-secondary" />
+        <div
+          className="absolute left-1 top-0 h-1.5 rounded-full bg-primary"
+          style={{ width: `calc(${fill}% - ${fill > 0 ? 0 : 0}px)` }}
+        />
+        <div className="absolute inset-x-1 top-0 flex -translate-y-1/2 justify-between">
+          {levels.map((l, i) => (
+            <span
+              key={l.name}
+              className={`flex size-4 items-center justify-center rounded-full border-2 border-card ${
+                l.state === "locked"
+                  ? "bg-muted-foreground/35"
+                  : i <= currentIndex
+                    ? "bg-primary"
+                    : "bg-secondary"
+              } ${l.state === "current" ? "ring-4 ring-primary/20" : ""}`}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="mt-3 flex justify-between gap-1">
+        {levels.map((l) => (
+          <span
+            key={l.name}
+            className={`flex-1 text-center text-[10px] leading-tight ${
+              l.state === "current"
+                ? "font-semibold text-primary"
+                : l.state === "locked"
+                  ? "text-muted-foreground/50"
+                  : "text-muted-foreground"
+            }`}
+          >
+            {l.state === "locked" && <Lock className="mx-auto mb-0.5 size-3" />}
+            {l.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+
 function Index() {
   return (
     <PhoneShell>
@@ -75,6 +133,7 @@ function Index() {
         <Link to="/analytics" className="block">
           <Card className="py-6">
             <ScoreRing score={pulse.score} />
+            <LevelProgress />
             <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-sm">
               <span>Показатели бизнеса</span>
               <ChevronRight className="size-4 text-muted-foreground" />
@@ -84,11 +143,18 @@ function Index() {
 
         <Link to="/insight" className="block">
           <Card>
-            <p className="text-xs text-muted-foreground">Главный инсайт</p>
-            <h2 className="mt-1 text-base font-semibold leading-snug">{insight.title}</h2>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Это влияет на показатель «Клиенты»
-            </p>
+            <div className="flex gap-3">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-warning/12 text-warning">
+                <Lightbulb className="size-5" />
+              </span>
+              <div className="flex-1">
+                <p className="text-xs text-muted-foreground">Главный инсайт</p>
+                <h2 className="mt-1 text-base font-semibold leading-snug">{insight.title}</h2>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Это влияет на показатель «Клиенты»
+                </p>
+              </div>
+            </div>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
               <span>Смотреть детали</span>
               <ChevronRight className="size-4 text-muted-foreground" />
@@ -98,10 +164,17 @@ function Index() {
 
         <Link to="/advisor" className="block">
           <Card>
-            <p className="text-xs text-muted-foreground">Рекомендация</p>
-            <h2 className="mt-1 text-base font-semibold leading-snug">
-              {recommendations[0]?.text}
-            </h2>
+            <div className="flex gap-3">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-info/12 text-info">
+                <Rocket className="size-5" />
+              </span>
+              <div className="flex-1">
+                <p className="text-xs text-muted-foreground">Рекомендация</p>
+                <h2 className="mt-1 text-base font-semibold leading-snug">
+                  {recommendations[0]?.text}
+                </h2>
+              </div>
+            </div>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
               <span>Смотреть рекомендации</span>
               <ChevronRight className="size-4 text-muted-foreground" />
@@ -109,6 +182,7 @@ function Index() {
           </Card>
         </Link>
       </div>
+
     </PhoneShell>
   );
 }
