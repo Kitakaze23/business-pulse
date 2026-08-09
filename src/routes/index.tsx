@@ -59,17 +59,28 @@ function Index() {
         title="Business Pulse"
         subtitle={pulse.updated}
         right={
-          <span className="relative">
-            <Bell className="size-5 text-foreground" />
-            <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-danger" />
+          <span className="flex items-center gap-3">
+            <Link to="/notifications" aria-label="Уведомления" className="relative">
+              <Bell className="size-5 text-foreground" />
+              <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-danger" />
+            </Link>
+            <Link to="/more" aria-label="Профиль">
+              <UserRound className="size-5 text-foreground" />
+            </Link>
           </span>
         }
       />
 
       <div className="space-y-3 p-4">
-        <Card className="py-6">
-          <ScoreRing score={pulse.score} />
-        </Card>
+        <Link to="/analytics" className="block">
+          <Card className="py-6">
+            <ScoreRing score={pulse.score} />
+            <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-sm">
+              <span>Показатели бизнеса</span>
+              <ChevronRight className="size-4 text-muted-foreground" />
+            </div>
+          </Card>
+        </Link>
 
         <Link to="/insight" className="block">
           <Card>
