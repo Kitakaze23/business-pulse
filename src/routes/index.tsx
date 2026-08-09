@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bell, ChevronRight } from "lucide-react";
+import { Bell, ChevronRight, UserRound } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { pulse, insight, recommendations } from "@/lib/business-data";
 
