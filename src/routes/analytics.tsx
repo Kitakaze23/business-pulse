@@ -31,7 +31,7 @@ function Analytics() {
       <div className="space-y-3 p-4">
         <Card className="space-y-5">
           {metrics.map((m, i) => {
-            const Icon = icons[i];
+            const Icon = icons[i] ?? Banknote;
             const bar =
               m.tone === "good" ? "bg-success" : m.tone === "warn" ? "bg-warning" : "bg-danger";
             return (

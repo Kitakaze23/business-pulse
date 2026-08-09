@@ -89,7 +89,7 @@ function Index() {
           <Card>
             <p className="text-xs text-muted-foreground">Рекомендация</p>
             <h2 className="mt-1 text-base font-semibold leading-snug">
-              {recommendations[0].text}
+              {recommendations[0]?.text}
             </h2>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
               <span>Смотреть рекомендации</span>
