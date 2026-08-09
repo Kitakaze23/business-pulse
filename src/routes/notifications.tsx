@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ChevronLeft } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 
 export const Route = createFileRoute("/notifications")({
@@ -28,7 +29,15 @@ const items = [
 function Notifications() {
   return (
     <PhoneShell>
-      <ScreenHeader title="Уведомления" subtitle="За последние 7 дней" />
+      <ScreenHeader
+        title="Уведомления"
+        subtitle="За последние 7 дней"
+        left={
+          <Link to="/" aria-label="Назад">
+            <ChevronLeft className="size-5" />
+          </Link>
+        }
+      />
       <div className="space-y-3 p-4">
         {items.map((i) => (
           <Card key={i.t}>

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 
 export const Route = createFileRoute("/more")({
@@ -25,7 +25,14 @@ const links = ["Профиль компании", "Источники данны
 function More() {
   return (
     <PhoneShell>
-      <ScreenHeader title="Ещё" />
+      <ScreenHeader
+        title="Профиль"
+        left={
+          <Link to="/" aria-label="Назад">
+            <ChevronLeft className="size-5" />
+          </Link>
+        }
+      />
       <div className="p-4">
         <Card className="divide-y divide-border p-0">
           {links.map((l) => (

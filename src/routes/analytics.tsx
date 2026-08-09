@@ -1,5 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Banknote, Users, TrendingUp, ShieldCheck, Gauge, ChevronRight } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Banknote,
+  Users,
+  TrendingUp,
+  ShieldCheck,
+  Gauge,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { metrics, factors, pulse } from "@/lib/business-data";
 
@@ -27,7 +35,15 @@ const icons = [Banknote, Users, TrendingUp, ShieldCheck, Gauge];
 function Analytics() {
   return (
     <PhoneShell>
-      <ScreenHeader title="Business Health" subtitle={pulse.updated} />
+      <ScreenHeader
+        title="Business Health"
+        subtitle={pulse.updated}
+        left={
+          <Link to="/" aria-label="Назад">
+            <ChevronLeft className="size-5" />
+          </Link>
+        }
+      />
       <div className="space-y-3 p-4">
         <Card className="space-y-5">
           {metrics.map((m, i) => {
