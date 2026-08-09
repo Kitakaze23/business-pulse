@@ -27,7 +27,15 @@ const icons = [Banknote, Users, TrendingUp, ShieldCheck, Gauge];
 function Analytics() {
   return (
     <PhoneShell>
-      <ScreenHeader title="Business Health" subtitle={pulse.updated} />
+      <ScreenHeader
+        title="Business Health"
+        subtitle={pulse.updated}
+        left={
+          <Link to="/" aria-label="Назад">
+            <ChevronLeft className="size-5" />
+          </Link>
+        }
+      />
       <div className="space-y-3 p-4">
         <Card className="space-y-5">
           {metrics.map((m, i) => {
