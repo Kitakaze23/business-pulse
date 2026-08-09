@@ -133,6 +133,7 @@ function Index() {
         <Link to="/analytics" className="block">
           <Card className="py-6">
             <ScoreRing score={pulse.score} />
+            <LevelProgress />
             <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-sm">
               <span>Показатели бизнеса</span>
               <ChevronRight className="size-4 text-muted-foreground" />
@@ -142,11 +143,18 @@ function Index() {
 
         <Link to="/insight" className="block">
           <Card>
-            <p className="text-xs text-muted-foreground">Главный инсайт</p>
-            <h2 className="mt-1 text-base font-semibold leading-snug">{insight.title}</h2>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Это влияет на показатель «Клиенты»
-            </p>
+            <div className="flex gap-3">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-warning/12 text-warning">
+                <Lightbulb className="size-5" />
+              </span>
+              <div className="flex-1">
+                <p className="text-xs text-muted-foreground">Главный инсайт</p>
+                <h2 className="mt-1 text-base font-semibold leading-snug">{insight.title}</h2>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Это влияет на показатель «Клиенты»
+                </p>
+              </div>
+            </div>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
               <span>Смотреть детали</span>
               <ChevronRight className="size-4 text-muted-foreground" />
@@ -156,10 +164,17 @@ function Index() {
 
         <Link to="/advisor" className="block">
           <Card>
-            <p className="text-xs text-muted-foreground">Рекомендация</p>
-            <h2 className="mt-1 text-base font-semibold leading-snug">
-              {recommendations[0]?.text}
-            </h2>
+            <div className="flex gap-3">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-info/12 text-info">
+                <Rocket className="size-5" />
+              </span>
+              <div className="flex-1">
+                <p className="text-xs text-muted-foreground">Рекомендация</p>
+                <h2 className="mt-1 text-base font-semibold leading-snug">
+                  {recommendations[0]?.text}
+                </h2>
+              </div>
+            </div>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
               <span>Смотреть рекомендации</span>
               <ChevronRight className="size-4 text-muted-foreground" />
@@ -167,6 +182,7 @@ function Index() {
           </Card>
         </Link>
       </div>
+
     </PhoneShell>
   );
 }
