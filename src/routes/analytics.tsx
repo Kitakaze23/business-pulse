@@ -1,5 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Banknote, Users, TrendingUp, ShieldCheck, Gauge, ChevronRight } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Banknote,
+  Users,
+  TrendingUp,
+  ShieldCheck,
+  Gauge,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { metrics, factors, pulse } from "@/lib/business-data";
 
