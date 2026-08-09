@@ -106,6 +106,9 @@ function LevelProgress() {
       </div>
     </div>
   );
+}
+
+
 
 function Index() {
   return (
