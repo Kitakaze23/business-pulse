@@ -1,24 +1,103 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Bell, ChevronRight } from "lucide-react";
+import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
+import { pulse, insight, recommendations } from "@/lib/business-data";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Business Pulse — здоровье бизнеса в одном балле" },
+      {
+        name: "description",
+        content:
+          "Оценка состояния бизнеса, ключевые инсайты и персональные рекомендации по росту выручки и удержанию клиентов.",
+      },
+      { property: "og:title", content: "Business Pulse — здоровье бизнеса" },
+      {
+        property: "og:description",
+        content: "Балл здоровья бизнеса, инсайты и рекомендации каждый день.",
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+function ScoreRing({ score }: { score: number }) {
+  const r = 78;
+  const c = 2 * Math.PI * r;
+  return (
+    <div className="relative mx-auto size-[200px]">
+      <svg viewBox="0 0 200 200" className="size-full -rotate-90">
+        <circle cx="100" cy="100" r={r} fill="none" strokeWidth="14" className="stroke-secondary" />
+        <circle
+          cx="100"
+          cy="100"
+          r={r}
+          fill="none"
+          strokeWidth="14"
+          strokeLinecap="round"
+          className="stroke-primary"
+          strokeDasharray={c}
+          strokeDashoffset={c - (c * score) / 100}
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-5xl font-bold tracking-tight">{score}</span>
+        <span className="mt-1 text-xs text-muted-foreground">{pulse.label}</span>
+        <span className="mt-1 text-xs font-medium text-success">
+          +{pulse.weekDelta} за неделю
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <PhoneShell>
+      <ScreenHeader
+        title="Business Pulse"
+        subtitle={pulse.updated}
+        right={
+          <span className="relative">
+            <Bell className="size-5 text-foreground" />
+            <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-danger" />
+          </span>
+        }
       />
-    </div>
+
+      <div className="space-y-3 p-4">
+        <Card className="py-6">
+          <ScoreRing score={pulse.score} />
+        </Card>
+
+        <Link to="/insight" className="block">
+          <Card>
+            <p className="text-xs text-muted-foreground">Главный инсайт</p>
+            <h2 className="mt-1 text-base font-semibold leading-snug">{insight.title}</h2>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Это влияет на показатель «Клиенты»
+            </p>
+            <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
+              <span>Смотреть детали</span>
+              <ChevronRight className="size-4 text-muted-foreground" />
+            </div>
+          </Card>
+        </Link>
+
+        <Link to="/advisor" className="block">
+          <Card>
+            <p className="text-xs text-muted-foreground">Рекомендация</p>
+            <h2 className="mt-1 text-base font-semibold leading-snug">
+              {recommendations[0].text}
+            </h2>
+            <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
+              <span>Смотреть рекомендации</span>
+              <ChevronRight className="size-4 text-muted-foreground" />
+            </div>
+          </Card>
+        </Link>
+      </div>
+    </PhoneShell>
   );
 }
