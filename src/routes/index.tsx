@@ -52,6 +52,61 @@ function ScoreRing({ score }: { score: number }) {
   );
 }
 
+const levels = [
+  { name: "Новичок", state: "done" },
+  { name: "Молодой", state: "done" },
+  { name: "Развивающийся", state: "current" },
+  { name: "Зрелый", state: "locked" },
+] as const;
+
+function LevelProgress() {
+  const currentIndex = levels.findIndex((l) => l.state === "current");
+  const fill = (currentIndex / (levels.length - 1)) * 100;
+
+  return (
+    <div className="mt-6 border-t border-border pt-5">
+      <p className="text-xs text-muted-foreground">Ваш уровень бизнеса</p>
+      <div className="relative mt-6 px-1">
+        <div className="h-1.5 rounded-full bg-secondary" />
+        <div
+          className="absolute left-1 top-0 h-1.5 rounded-full bg-primary"
+          style={{ width: `calc(${fill}% - ${fill > 0 ? 0 : 0}px)` }}
+        />
+        <div className="absolute inset-x-1 top-0 flex -translate-y-1/2 justify-between">
+          {levels.map((l, i) => (
+            <span
+              key={l.name}
+              className={`flex size-4 items-center justify-center rounded-full border-2 border-card ${
+                l.state === "locked"
+                  ? "bg-muted-foreground/35"
+                  : i <= currentIndex
+                    ? "bg-primary"
+                    : "bg-secondary"
+              } ${l.state === "current" ? "ring-4 ring-primary/20" : ""}`}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="mt-3 flex justify-between gap-1">
+        {levels.map((l) => (
+          <span
+            key={l.name}
+            className={`flex-1 text-center text-[10px] leading-tight ${
+              l.state === "current"
+                ? "font-semibold text-primary"
+                : l.state === "locked"
+                  ? "text-muted-foreground/50"
+                  : "text-muted-foreground"
+            }`}
+          >
+            {l.state === "locked" && <Lock className="mx-auto mb-0.5 size-3" />}
+            {l.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+
 function Index() {
   return (
     <PhoneShell>
