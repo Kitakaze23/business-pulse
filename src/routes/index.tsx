@@ -111,23 +111,59 @@ function LevelProgress() {
 
 
 function Index() {
+  const [launchMode, setLaunchMode] = useState(false);
+
+  const headerRight = (
+    <span className="flex items-center gap-3">
+      <button
+        type="button"
+        role="switch"
+        aria-checked={launchMode}
+        aria-label="Новый бизнес"
+        onClick={() => setLaunchMode((v) => !v)}
+        className="flex items-center gap-2"
+      >
+        <span className="text-[11px] leading-tight text-muted-foreground">
+          Новый
+          <br />
+          бизнес
+        </span>
+        <span
+          className={`relative h-5 w-9 rounded-full transition-colors ${
+            launchMode ? "bg-primary" : "bg-secondary"
+          }`}
+        >
+          <span
+            className={`absolute top-0.5 size-4 rounded-full bg-card shadow-card transition-all ${
+              launchMode ? "left-[18px]" : "left-0.5"
+            }`}
+          />
+        </span>
+      </button>
+      <Link to="/notifications" aria-label="Уведомления" className="relative">
+        <Bell className="size-5 text-foreground" />
+        <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-danger" />
+      </Link>
+      <Link to="/more" aria-label="Профиль">
+        <UserRound className="size-5 text-foreground" />
+      </Link>
+    </span>
+  );
+
+  if (launchMode) {
+    return (
+      <PhoneShell>
+        <div className="animate-in fade-in duration-300">
+          <BusinessLaunch headerRight={headerRight} onGoToPulse={() => setLaunchMode(false)} />
+        </div>
+      </PhoneShell>
+    );
+  }
+
   return (
     <PhoneShell>
-      <ScreenHeader
-        title="Business Pulse"
-        subtitle={pulse.updated}
-        right={
-          <span className="flex items-center gap-3">
-            <Link to="/notifications" aria-label="Уведомления" className="relative">
-              <Bell className="size-5 text-foreground" />
-              <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-danger" />
-            </Link>
-            <Link to="/more" aria-label="Профиль">
-              <UserRound className="size-5 text-foreground" />
-            </Link>
-          </span>
-        }
-      />
+      <div className="animate-in fade-in duration-300">
+      <ScreenHeader title="Business Pulse" subtitle={pulse.updated} right={headerRight} />
 
       <div className="space-y-3 p-4">
         <Link to="/analytics" className="block">
