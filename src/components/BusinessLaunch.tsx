@@ -52,11 +52,11 @@ function ScoreRing({ score }: { score: number }) {
           {score}
           <span className="text-lg text-muted-foreground"> / 100</span>
         </span>
-        <span className="mt-1 px-6 text-center text-xs text-muted-foreground">
-          {score >= 70 ? launchScore.label : launchScore.hint}
-        </span>
       </div>
     </div>
+    <p className="mt-3 text-center text-xs text-muted-foreground">
+      {score >= 70 ? launchScore.label : launchScore.hint}
+    </p>
   );
 }
 
