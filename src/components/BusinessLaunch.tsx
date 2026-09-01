@@ -57,6 +57,7 @@ function ScoreRing({ score }: { score: number }) {
     <p className="mt-3 text-center text-xs text-muted-foreground">
       {score >= 70 ? launchScore.label : launchScore.hint}
     </p>
+  </>
   );
 }
 
