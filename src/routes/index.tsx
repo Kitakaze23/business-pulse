@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Bell, ChevronRight, UserRound, Lightbulb, Rocket, Lock } from "lucide-react";
+import { useState } from "react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
+import { BusinessLaunch } from "@/components/BusinessLaunch";
 import { pulse, insight, recommendations } from "@/lib/business-data";
 
 export const Route = createFileRoute("/")({
@@ -218,7 +220,7 @@ function Index() {
           </Card>
         </Link>
       </div>
-
+      </div>
     </PhoneShell>
   );
 }
