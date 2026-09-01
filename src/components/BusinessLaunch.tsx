@@ -31,6 +31,7 @@ function ScoreRing({ score }: { score: number }) {
   const r = 78;
   const c = 2 * Math.PI * r;
   return (
+    <>
     <div className="relative mx-auto size-[200px]">
       <svg viewBox="0 0 200 200" className="size-full -rotate-90">
         <circle cx="100" cy="100" r={r} fill="none" strokeWidth="14" className="stroke-secondary" />
@@ -52,11 +53,12 @@ function ScoreRing({ score }: { score: number }) {
           {score}
           <span className="text-lg text-muted-foreground"> / 100</span>
         </span>
-        <span className="mt-1 px-6 text-center text-xs text-muted-foreground">
-          {score >= 70 ? launchScore.label : launchScore.hint}
-        </span>
       </div>
     </div>
+    <p className="mt-3 text-center text-xs text-muted-foreground">
+      {score >= 70 ? launchScore.label : launchScore.hint}
+    </p>
+  </>
   );
 }
 
