@@ -31,6 +31,7 @@ function ScoreRing({ score }: { score: number }) {
   const r = 78;
   const c = 2 * Math.PI * r;
   return (
+    <>
     <div className="relative mx-auto size-[200px]">
       <svg viewBox="0 0 200 200" className="size-full -rotate-90">
         <circle cx="100" cy="100" r={r} fill="none" strokeWidth="14" className="stroke-secondary" />
