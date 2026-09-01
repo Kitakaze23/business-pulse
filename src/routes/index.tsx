@@ -3,19 +3,20 @@ import { Bell, ChevronRight, UserRound, Lightbulb, Rocket, Lock } from "lucide-r
 import { useState } from "react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
+import { PulseShowcase } from "@/components/PulseShowcase";
 import { pulse, insight, recommendations } from "@/lib/business-data";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Business Pulse — здоровье бизнеса в одном балле" },
+      { title: "Бизнес Пульс — здоровье бизнеса в одном балле" },
       {
         name: "description",
         content:
           "Оценка состояния бизнеса, ключевые инсайты и персональные рекомендации по росту выручки и удержанию клиентов.",
       },
-      { property: "og:title", content: "Business Pulse — здоровье бизнеса" },
+      { property: "og:title", content: "Бизнес Пульс — здоровье бизнеса" },
       {
         property: "og:description",
         content: "Балл здоровья бизнеса, инсайты и рекомендации каждый день.",
@@ -165,7 +166,7 @@ function Index() {
   return (
     <PhoneShell>
       <div className="animate-in fade-in duration-300">
-      <ScreenHeader title="Business Pulse" subtitle={pulse.updated} right={headerRight} />
+      <ScreenHeader title="Бизнес Пульс" subtitle={pulse.updated} right={headerRight} />
 
       <div className="space-y-3 p-4">
         <Link to="/analytics" className="block">
@@ -219,6 +220,8 @@ function Index() {
             </div>
           </Card>
         </Link>
+
+        <PulseShowcase />
       </div>
       </div>
     </PhoneShell>

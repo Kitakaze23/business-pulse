@@ -76,7 +76,7 @@ export const launchSteps: LaunchStep[] = [
     done: false,
     why: "Первая продажа запускает формирование аналитики бизнеса.",
     action: "Доведите первого клиента до оплаты.",
-    result: "Начинает копиться история для Business Pulse.",
+    result: "Начинает копиться история для Бизнес Пульс.",
   },
 ];
 
@@ -164,7 +164,7 @@ export const journey = [
   "Привлечение клиентов",
   "Первая продажа",
   "Первые 10 клиентов",
-  "Business Pulse",
+  "Бизнес Пульс",
 ];
 
 export const firstSale = {

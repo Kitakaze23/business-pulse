@@ -15,13 +15,13 @@ export const Route = createFileRoute("/analytics")({
   component: Analytics,
   head: () => ({
     meta: [
-      { title: "Business Health — показатели бизнеса" },
+      { title: "Здоровье бизнеса — показатели бизнеса" },
       {
         name: "description",
         content:
           "Доход, клиенты, рост, стабильность и эффективность: подробная разбивка балла здоровья бизнеса.",
       },
-      { property: "og:title", content: "Business Health — показатели бизнеса" },
+      { property: "og:title", content: "Здоровье бизнеса — показатели бизнеса" },
       {
         property: "og:description",
         content: "Разбивка балла здоровья бизнеса по пяти ключевым метрикам.",
@@ -36,7 +36,7 @@ function Analytics() {
   return (
     <PhoneShell>
       <ScreenHeader
-        title="Business Health"
+        title="Здоровье бизнеса"
         subtitle={pulse.updated}
         left={
           <Link to="/" aria-label="Назад">

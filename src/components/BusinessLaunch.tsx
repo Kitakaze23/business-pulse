@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { ScreenHeader, Card } from "@/components/PhoneShell";
+import { LaunchShowcase } from "@/components/LaunchShowcase";
 import {
   launchScore,
   launchSteps,
@@ -446,14 +447,15 @@ export function BusinessLaunch({
   return (
     <>
       <ScreenHeader
-        title="Business Pulse"
+        title="Бизнес Пульс"
         subtitle="Режим «Новый бизнес»"
         right={headerRight}
       />
       <div className="space-y-3 p-4">
         <Card className="py-6">
           <div className="px-1 text-center">
-            <h2 className="text-xl font-semibold tracking-tight">Business Launch</h2>
+            <h2 className="text-xl font-semibold tracking-tight">Новый бизнес</h2>
+            <p className="mt-0.5 text-[11px] text-muted-foreground">Помощь на старте бизнеса</p>
             <p className="mt-1 text-xs text-muted-foreground">
               Запустите бизнес и быстрее приходите к первым продажам
             </p>
@@ -578,6 +580,8 @@ export function BusinessLaunch({
           </CTA>
         </Card>
 
+        <LaunchShowcase onPickLocation={() => setScreen("location")} />
+
         <Card>
           <p className="text-sm font-semibold">Путь до первой продажи</p>
           <p className="mt-1 text-xs text-info">Вы сейчас здесь → {currentStage}</p>
@@ -650,7 +654,7 @@ export function BusinessLaunch({
               <Activity className="size-5" />
             </span>
             <div className="flex-1">
-              <h3 className="text-base font-semibold leading-snug">Business Pulse формируется</h3>
+              <h3 className="text-base font-semibold leading-snug">Бизнес Пульс формируется</h3>
               <p className="mt-1 text-xs text-muted-foreground">
                 {pulseProgress >= 100
                   ? "У нас уже достаточно данных, чтобы оценивать состояние бизнеса."
@@ -665,10 +669,10 @@ export function BusinessLaunch({
             />
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            {pulseProgress >= 100 ? "Business Pulse 82" : `${pulseProgress}% до формирования Business Pulse`}
+            {pulseProgress >= 100 ? "Бизнес Пульс 82" : `${pulseProgress}% до формирования Бизнес Пульс`}
           </p>
           <CTA variant={pulseProgress >= 100 ? "primary" : "ghost"} onClick={onGoToPulse}>
-            Перейти в Business Pulse
+            Перейти в Бизнес Пульс
           </CTA>
         </Card>
       </div>

@@ -15,6 +15,7 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as InsightRouteImport } from './routes/insight'
 import { Route as MoreRouteImport } from './routes/more'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as SolutionsRouteImport } from './routes/solutions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const NotificationsRoute = NotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
   '/notifications': typeof NotificationsRoute
+  '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
   '/notifications': typeof NotificationsRoute
+  '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,13 +79,27 @@ export interface FileRoutesById {
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
   '/notifications': typeof NotificationsRoute
+  '/solutions': typeof SolutionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/advisor' | '/analytics' | '/insight' | '/more' | '/notifications'
+    | '/'
+    | '/advisor'
+    | '/analytics'
+    | '/insight'
+    | '/more'
+    | '/notifications'
+    | '/solutions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/advisor' | '/analytics' | '/insight' | '/more' | '/notifications'
+  to:
+    | '/'
+    | '/advisor'
+    | '/analytics'
+    | '/insight'
+    | '/more'
+    | '/notifications'
+    | '/solutions'
   id:
     | '__root__'
     | '/'
@@ -86,6 +108,7 @@ export interface FileRouteTypes {
     | '/insight'
     | '/more'
     | '/notifications'
+    | '/solutions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -95,6 +118,7 @@ export interface RootRouteChildren {
   InsightRoute: typeof InsightRoute
   MoreRoute: typeof MoreRoute
   NotificationsRoute: typeof NotificationsRoute
+  SolutionsRoute: typeof SolutionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -151,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   InsightRoute: InsightRoute,
   MoreRoute: MoreRoute,
   NotificationsRoute: NotificationsRoute,
+  SolutionsRoute: SolutionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
