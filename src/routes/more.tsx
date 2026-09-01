@@ -6,12 +6,12 @@ export const Route = createFileRoute("/more")({
   component: More,
   head: () => ({
     meta: [
-      { title: "Ещё — настройки Business Pulse" },
+      { title: "Ещё — настройки Бизнес Пульс" },
       {
         name: "description",
-        content: "Профиль компании, источники данных и настройки отчётов Business Pulse.",
+        content: "Профиль компании, источники данных и настройки отчётов Бизнес Пульс.",
       },
-      { property: "og:title", content: "Ещё — настройки Business Pulse" },
+      { property: "og:title", content: "Ещё — настройки Бизнес Пульс" },
       {
         property: "og:description",
         content: "Профиль компании, источники данных и настройки отчётов.",

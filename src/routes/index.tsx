@@ -166,7 +166,7 @@ function Index() {
   return (
     <PhoneShell>
       <div className="animate-in fade-in duration-300">
-      <ScreenHeader title="Business Pulse" subtitle={pulse.updated} right={headerRight} />
+      <ScreenHeader title="Бизнес Пульс" subtitle={pulse.updated} right={headerRight} />
 
       <div className="space-y-3 p-4">
         <Link to="/analytics" className="block">
@@ -220,6 +220,8 @@ function Index() {
             </div>
           </Card>
         </Link>
+
+        <PulseShowcase />
       </div>
       </div>
     </PhoneShell>
