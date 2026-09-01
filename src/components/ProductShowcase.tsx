@@ -89,6 +89,11 @@ export function ProductCard({
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-semibold leading-snug">{product.name}</h3>
+            {product.status === "new" && (
+              <span className="rounded-full bg-primary/12 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                Новинка
+              </span>
+            )}
             {product.status === "recommended" && (
               <span className="rounded-full bg-success/12 px-2 py-0.5 text-[10px] font-semibold text-success">
                 Рекомендуем

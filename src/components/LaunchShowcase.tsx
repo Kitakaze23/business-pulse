@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Check, Circle, ChevronRight } from "lucide-react";
 import { Card } from "@/components/PhoneShell";
 import { ProductCard, ProductModal } from "@/components/ProductShowcase";
@@ -101,6 +102,14 @@ export function LaunchShowcase({ onPickLocation }: { onPickLocation?: () => void
           }}
         />
       ))}
+
+      <Link
+        to="/solutions"
+        className="flex items-center justify-between rounded-2xl bg-card p-4 text-sm font-semibold text-primary shadow-card"
+      >
+        Все решения
+        <ChevronRight className="size-4 text-muted-foreground" />
+      </Link>
 
       {open && <ProductModal product={open} onClose={() => setOpen(null)} />}
     </>
