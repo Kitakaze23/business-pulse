@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Check, Circle, ChevronRight } from "lucide-react";
 import { Card } from "@/components/PhoneShell";
 import { ProductCard, ProductModal } from "@/components/ProductShowcase";
