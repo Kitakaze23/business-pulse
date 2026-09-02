@@ -171,9 +171,10 @@ function Index() {
   if (launchMode) {
     return (
       <PhoneShell>
-        <div className="animate-in fade-in duration-300">
+        <div className="animate-in fade-in pb-24 duration-300">
           <BusinessLaunch headerRight={headerRight} onGoToPulse={() => setLaunchMode(false)} />
         </div>
+        <TabBar active="/" />
       </PhoneShell>
     );
   }
@@ -239,6 +240,7 @@ function Index() {
         <ServicesWidget />
       </div>
       </div>
+      <TabBar active="/" />
     </PhoneShell>
   );
 }
