@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const LAUNCH_MODE_KEY = "bp-launch-mode";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
+import { TabBar } from "@/components/TabBar";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
 import { ServicesWidget } from "@/components/ServicesWidget";
 import { pulse, insight, recommendations } from "@/lib/business-data";
@@ -170,16 +171,17 @@ function Index() {
   if (launchMode) {
     return (
       <PhoneShell>
-        <div className="animate-in fade-in duration-300">
+        <div className="animate-in fade-in pb-24 duration-300">
           <BusinessLaunch headerRight={headerRight} onGoToPulse={() => setLaunchMode(false)} />
         </div>
+        <TabBar active="/" />
       </PhoneShell>
     );
   }
 
   return (
     <PhoneShell>
-      <div className="animate-in fade-in duration-300">
+      <div className="animate-in fade-in pb-24 duration-300">
       <ScreenHeader title="Бизнес Пульс" subtitle={pulse.updated} right={headerRight} />
 
       <div className="space-y-3 p-4">
@@ -238,6 +240,7 @@ function Index() {
         <ServicesWidget />
       </div>
       </div>
+      <TabBar active="/" />
     </PhoneShell>
   );
 }
