@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const LAUNCH_MODE_KEY = "bp-launch-mode";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
+import { TabBar } from "@/components/TabBar";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
 import { ServicesWidget } from "@/components/ServicesWidget";
 import { pulse, insight, recommendations } from "@/lib/business-data";
