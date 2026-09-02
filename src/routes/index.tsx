@@ -181,7 +181,7 @@ function Index() {
 
   return (
     <PhoneShell>
-      <div className="animate-in fade-in duration-300">
+      <div className="animate-in fade-in pb-24 duration-300">
       <ScreenHeader title="Бизнес Пульс" subtitle={pulse.updated} right={headerRight} />
 
       <div className="space-y-3 p-4">
