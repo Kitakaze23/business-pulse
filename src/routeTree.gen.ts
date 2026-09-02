@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdvisorRouteImport } from './routes/advisor'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as ChatRouteImport } from './routes/chat'
 import { Route as InsightRouteImport } from './routes/insight'
 import { Route as MoreRouteImport } from './routes/more'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as ProAnalyticsRouteImport } from './routes/pro-analytics'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 
 const IndexRoute = IndexRouteImport.update({
@@ -32,6 +34,11 @@ const AnalyticsRoute = AnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InsightRoute = InsightRouteImport.update({
   id: '/insight',
   path: '/insight',
@@ -47,6 +54,11 @@ const NotificationsRoute = NotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProAnalyticsRoute = ProAnalyticsRouteImport.update({
+  id: '/pro-analytics',
+  path: '/pro-analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
@@ -57,18 +69,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advisor': typeof AdvisorRoute
   '/analytics': typeof AnalyticsRoute
+  '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
   '/notifications': typeof NotificationsRoute
+  '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advisor': typeof AdvisorRoute
   '/analytics': typeof AnalyticsRoute
+  '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
   '/notifications': typeof NotificationsRoute
+  '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesById {
@@ -76,9 +92,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/advisor': typeof AdvisorRoute
   '/analytics': typeof AnalyticsRoute
+  '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
   '/notifications': typeof NotificationsRoute
+  '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
 }
 export interface FileRouteTypes {
@@ -87,27 +105,33 @@ export interface FileRouteTypes {
     | '/'
     | '/advisor'
     | '/analytics'
+    | '/chat'
     | '/insight'
     | '/more'
     | '/notifications'
+    | '/pro-analytics'
     | '/solutions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/advisor'
     | '/analytics'
+    | '/chat'
     | '/insight'
     | '/more'
     | '/notifications'
+    | '/pro-analytics'
     | '/solutions'
   id:
     | '__root__'
     | '/'
     | '/advisor'
     | '/analytics'
+    | '/chat'
     | '/insight'
     | '/more'
     | '/notifications'
+    | '/pro-analytics'
     | '/solutions'
   fileRoutesById: FileRoutesById
 }
@@ -115,9 +139,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvisorRoute: typeof AdvisorRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  ChatRoute: typeof ChatRoute
   InsightRoute: typeof InsightRoute
   MoreRoute: typeof MoreRoute
   NotificationsRoute: typeof NotificationsRoute
+  ProAnalyticsRoute: typeof ProAnalyticsRoute
   SolutionsRoute: typeof SolutionsRoute
 }
 
@@ -144,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/insight': {
       id: '/insight'
       path: '/insight'
@@ -165,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pro-analytics': {
+      id: '/pro-analytics'
+      path: '/pro-analytics'
+      fullPath: '/pro-analytics'
+      preLoaderRoute: typeof ProAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -179,9 +219,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvisorRoute: AdvisorRoute,
   AnalyticsRoute: AnalyticsRoute,
+  ChatRoute: ChatRoute,
   InsightRoute: InsightRoute,
   MoreRoute: MoreRoute,
   NotificationsRoute: NotificationsRoute,
+  ProAnalyticsRoute: ProAnalyticsRoute,
   SolutionsRoute: SolutionsRoute,
 }
 export const routeTree = rootRouteImport
