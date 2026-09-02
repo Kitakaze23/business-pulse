@@ -324,15 +324,27 @@ export const launchKit = {
   subtitle: "Для кофейни",
   items: [
     { id: "account", done: true },
-    { id: "acquiring", done: true },
+    { id: "acquiring", done: false },
     { id: "sbp", done: true },
-    { id: "kassa", done: true },
+    { id: "kassa", done: false },
     { id: "card", done: true },
     { id: "accounting", done: true },
     { id: "location", done: true },
     { id: "target", done: false },
   ],
 };
+
+/** Приоритет сервисов в режиме «Новый бизнес». */
+export const launchServiceOrder = [
+  "account",
+  "acquiring",
+  "sbp",
+  "kassa",
+  "card",
+  "accounting",
+  "target",
+];
+
 
 export const launchStages: { title: string; productIds: string[]; extra?: string[] }[] = [
   { title: "Подготовить бизнес", productIds: ["account", "card", "accounting"] },
