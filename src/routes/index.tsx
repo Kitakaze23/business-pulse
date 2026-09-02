@@ -116,7 +116,19 @@ function LevelProgress() {
 
 
 function Index() {
-  const [launchMode, setLaunchMode] = useState(false);
+  const [launchMode, setLaunchModeState] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem(LAUNCH_MODE_KEY) === "1") setLaunchModeState(true);
+  }, []);
+
+  const setLaunchMode = (value: boolean | ((v: boolean) => boolean)) => {
+    setLaunchModeState((prev) => {
+      const next = typeof value === "function" ? value(prev) : value;
+      localStorage.setItem(LAUNCH_MODE_KEY, next ? "1" : "0");
+      return next;
+    });
+  };
 
   const headerRight = (
     <span className="flex items-center gap-3">
