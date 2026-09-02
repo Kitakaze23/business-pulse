@@ -15,7 +15,7 @@ export function ServicesWidget() {
   const list = pick(pulsePreview);
 
   return (
-    <Link to="/solutions" className="block">
+    <Link to="/solutions" search={{ mode: "pulse" as const }} className="block">
       <Card>
         <h2 className="text-base font-semibold leading-snug">Сервисы для вас</h2>
         <p className="mt-1 text-xs text-muted-foreground">
