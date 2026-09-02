@@ -3,7 +3,7 @@ import { Bell, ChevronRight, UserRound, Lightbulb, Rocket, Lock } from "lucide-r
 import { useState } from "react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
-import { PulseShowcase } from "@/components/PulseShowcase";
+import { ServicesWidget } from "@/components/ServicesWidget";
 import { pulse, insight, recommendations } from "@/lib/business-data";
 
 export const Route = createFileRoute("/")({
@@ -221,7 +221,7 @@ function Index() {
           </Card>
         </Link>
 
-        <PulseShowcase />
+        <ServicesWidget />
       </div>
       </div>
     </PhoneShell>

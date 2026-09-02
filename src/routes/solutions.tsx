@@ -1,42 +1,73 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronLeft, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
-import { ProductCatalog, ProductCard, ProductModal } from "@/components/ProductShowcase";
-import { products, type Product } from "@/lib/products-data";
+import {
+  CategoryFilter,
+  ProductCard,
+  ProductModal,
+} from "@/components/ProductShowcase";
+import {
+  products,
+  launchServiceOrder,
+  launchStages,
+  pulseScenarios,
+  type Product,
+  type ProductCategory,
+} from "@/lib/products-data";
+
+type Mode = "pulse" | "launch";
 
 export const Route = createFileRoute("/solutions")({
   component: Solutions,
+  validateSearch: (search: Record<string, unknown>): { mode: Mode } => ({
+    mode: search["mode"] === "launch" ? "launch" : "pulse",
+  }),
   head: () => ({
     meta: [
-      { title: "Решения для бизнеса — Бизнес Пульс" },
+      { title: "Сервисы для вас — Бизнес Пульс" },
       {
         name: "description",
         content:
-          "Продукты и сервисы для бизнеса: счёт, приём оплаты, продвижение, бухгалтерия и управление — подобраны под задачи вашего бизнеса.",
+          "Сервисы и решения для задач вашего бизнеса: счёт, приём оплаты, продвижение, бухгалтерия и управление — подобраны по данным Бизнес Пульс.",
       },
-      { property: "og:title", content: "Решения для бизнеса — Бизнес Пульс" },
+      { property: "og:title", content: "Сервисы для вас — Бизнес Пульс" },
       {
         property: "og:description",
-        content: "Каталог решений под текущие задачи бизнеса с фильтрами по категориям.",
+        content: "Персональная подборка сервисов и полный каталог с категориями.",
       },
     ],
   }),
 });
 
 function Solutions() {
+  const { mode } = Route.useSearch();
+  const isLaunch = mode === "launch";
   const [open, setOpen] = useState<Product | null>(null);
-  // Последние добавленные в витрину продукты — в конце каталога, показываем свежие первыми.
-  const fresh = useMemo(
-    () => [...products].filter((p) => p.status === "new").reverse().slice(0, 5),
-    []
-  );
+  const [category, setCategory] = useState<ProductCategory | "all">("all");
+
+  const personal = useMemo(() => {
+    const ids = isLaunch ? launchServiceOrder.slice(0, 3) : pulseScenarios[0]!.recommended;
+    return ids.map((id) => products.find((p) => p.id === id)).filter(Boolean) as Product[];
+  }, [isLaunch]);
+
+  const catalog = useMemo(() => {
+    const base = isLaunch
+      ? [
+          ...(launchServiceOrder
+            .map((id) => products.find((p) => p.id === id))
+            .filter(Boolean) as Product[]),
+          ...products.filter((p) => !launchServiceOrder.includes(p.id)),
+        ]
+      : products;
+    return category === "all" ? base : base.filter((p) => p.category === category);
+  }, [category, isLaunch]);
 
   return (
     <PhoneShell>
       <ScreenHeader
-        title="Все решения"
-        subtitle="Подобрано под задачи вашего бизнеса"
+        title="Сервисы для вас"
+        subtitle="Решения и сервисы для задач вашего бизнеса"
         left={
           <Link to="/" aria-label="Назад">
             <ChevronLeft className="size-5" />
@@ -45,25 +76,60 @@ function Solutions() {
       />
       <div className="space-y-3 p-4">
         <Card>
-          <div className="flex gap-3">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/12 text-primary">
-              <Sparkles className="size-5" />
-            </span>
-            <div className="flex-1">
-              <h2 className="text-base font-semibold leading-snug">Новое в витрине</h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Последние добавленные решения для вашего бизнеса.
-              </p>
-            </div>
-          </div>
+          <h2 className="text-base font-semibold leading-snug">
+            {isLaunch ? "Сервисы для запуска бизнеса" : "Подобрали для вас"}
+          </h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {isLaunch
+              ? "Всё необходимое, чтобы подготовить бизнес к первым продажам."
+              : "Сервисы подобраны по данным Бизнес Пульс и текущим задачам бизнеса."}
+          </p>
         </Card>
 
-        {fresh.map((p) => (
+        {personal.map((p) => (
           <ProductCard key={p.id} product={p} onOpen={setOpen} />
         ))}
 
-        <p className="px-1 pt-2 text-xs font-semibold text-muted-foreground">Каталог решений</p>
-        <ProductCatalog />
+        {isLaunch && (
+          <Card>
+            <p className="text-sm font-semibold">Что за чем подключать</p>
+            <div className="mt-3 space-y-3">
+              {launchStages.map((stage) => (
+                <div key={stage.title} className="rounded-xl bg-secondary p-3">
+                  <p className="text-xs font-semibold">{stage.title}</p>
+                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                    {[
+                      ...stage.productIds.map(
+                        (id) => products.find((p) => p.id === id)?.name ?? id
+                      ),
+                      ...(stage.extra ?? []),
+                    ].map((name, i, arr) => (
+                      <span key={name} className="flex items-center gap-1.5">
+                        <span className="rounded-full bg-card px-2 py-1 text-[11px]">{name}</span>
+                        {i < arr.length - 1 && (
+                          <ChevronRight className="size-3 text-muted-foreground" />
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
+
+        <p className="px-1 pt-2 text-xs font-semibold text-muted-foreground">Каталог сервисов</p>
+        <CategoryFilter value={category} onChange={setCategory} />
+        <div className="space-y-3">
+          {catalog.map((p) => (
+            <ProductCard key={p.id} product={p} onOpen={setOpen} />
+          ))}
+          {catalog.length === 0 && (
+            <Card>
+              <p className="text-sm text-muted-foreground">В этой категории пока нет сервисов.</p>
+            </Card>
+          )}
+        </div>
       </div>
       {open && <ProductModal product={open} onClose={() => setOpen(null)} />}
     </PhoneShell>

@@ -14,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { ScreenHeader, Card } from "@/components/PhoneShell";
-import { LaunchShowcase } from "@/components/LaunchShowcase";
+import { LaunchServicesWidget } from "@/components/ServicesWidget";
 import {
   launchScore,
   launchSteps,
@@ -580,7 +580,7 @@ export function BusinessLaunch({
           </CTA>
         </Card>
 
-        <LaunchShowcase onPickLocation={() => setScreen("location")} />
+        <LaunchServicesWidget />
 
         <Card>
           <p className="text-sm font-semibold">Путь до первой продажи</p>
