@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Bell, ChevronRight, UserRound, Lightbulb, Rocket, Lock } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const LAUNCH_MODE_KEY = "bp-launch-mode";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
 import { ServicesWidget } from "@/components/ServicesWidget";
