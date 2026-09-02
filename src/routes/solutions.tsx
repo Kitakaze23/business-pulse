@@ -20,8 +20,8 @@ type Mode = "pulse" | "launch";
 
 export const Route = createFileRoute("/solutions")({
   component: Solutions,
-  validateSearch: (search: Record<string, unknown>): { mode?: Mode } => ({
-    mode: search["mode"] === "launch" ? "launch" : undefined,
+  validateSearch: (search: Record<string, unknown>): { mode: Mode } => ({
+    mode: search["mode"] === "launch" ? "launch" : "pulse",
   }),
   head: () => ({
     meta: [
