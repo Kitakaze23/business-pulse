@@ -20,6 +20,13 @@ export const Route = createFileRoute("/more")({
   }),
 });
 
+const sections = [
+  { to: "/my-business", title: "Мой бизнес", text: "Стадия развития и задачи этапа" },
+  { to: "/my-services", title: "Мои сервисы", text: "Чем вы уже пользуетесь" },
+  { to: "/tasks", title: "Мои задачи", text: "Что хотите сделать с бизнесом" },
+  { to: "/solutions", title: "Сервисы для вас", text: "Персональные рекомендации" },
+] as const;
+
 const links = ["Профиль компании", "Источники данных", "Отчёты", "Настройки уведомлений", "Помощь"];
 
 function More() {
@@ -33,7 +40,23 @@ function More() {
           </Link>
         }
       />
-      <div className="p-4">
+      <div className="space-y-3 p-4">
+        <Card className="divide-y divide-border p-0">
+          {sections.map((s) => (
+            <Link
+              key={s.to}
+              to={s.to}
+              className="flex items-center justify-between px-4 py-3.5"
+            >
+              <span>
+                <span className="block text-sm font-medium">{s.title}</span>
+                <span className="mt-0.5 block text-xs text-muted-foreground">{s.text}</span>
+              </span>
+              <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+            </Link>
+          ))}
+        </Card>
+
         <Card className="divide-y divide-border p-0">
           {links.map((l) => (
             <div key={l} className="flex items-center justify-between px-4 py-4 text-sm">
@@ -42,9 +65,10 @@ function More() {
             </div>
           ))}
         </Card>
+
         <Link
           to="/insight"
-          className="mt-3 block rounded-2xl bg-card p-4 text-sm font-medium shadow-card"
+          className="block rounded-2xl bg-card p-4 text-sm font-medium shadow-card"
         >
           Открыть последний инсайт
         </Link>
@@ -52,3 +76,4 @@ function More() {
     </PhoneShell>
   );
 }
+

@@ -185,16 +185,25 @@ function Index() {
       <ScreenHeader title="Бизнес Пульс" subtitle={pulse.updated} right={headerRight} />
 
       <div className="space-y-3 p-4">
-        <Link to="/analytics" className="block">
-          <Card className="py-6">
-            <ScoreRing score={pulse.score} />
-            <LevelProgress />
-            <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-sm">
-              <span>Показатели бизнеса</span>
-              <ChevronRight className="size-4 text-muted-foreground" />
-            </div>
-          </Card>
-        </Link>
+        <Card className="py-6">
+          <ScoreRing score={pulse.score} />
+          <LevelProgress />
+          <Link
+            to="/my-business"
+            className="mt-4 flex items-center justify-between border-t border-border pt-3 text-sm"
+          >
+            <span>Мой бизнес — стадия и задачи этапа</span>
+            <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+          </Link>
+          <Link
+            to="/analytics"
+            className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm"
+          >
+            <span>Показатели бизнеса</span>
+            <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+          </Link>
+        </Card>
+
 
         <Link to="/insight" className="block">
           <Card>
