@@ -91,7 +91,6 @@ export function LaunchServicesWidget() {
         </div>
       </Card>
 
-      </Card>
     </Link>
   );
 }
