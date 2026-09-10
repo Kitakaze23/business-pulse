@@ -15,9 +15,13 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as InsightRouteImport } from './routes/insight'
 import { Route as MoreRouteImport } from './routes/more'
+import { Route as MyBusinessRouteImport } from './routes/my-business'
+import { Route as MyServicesRouteImport } from './routes/my-services'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ProAnalyticsRouteImport } from './routes/pro-analytics'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as MetricIdRouteImport } from './routes/metric.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -49,6 +53,16 @@ const MoreRoute = MoreRouteImport.update({
   path: '/more',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyBusinessRoute = MyBusinessRouteImport.update({
+  id: '/my-business',
+  path: '/my-business',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyServicesRoute = MyServicesRouteImport.update({
+  id: '/my-services',
+  path: '/my-services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -64,6 +78,16 @@ const SolutionsRoute = SolutionsRouteImport.update({
   path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TasksRoute = TasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetricIdRoute = MetricIdRouteImport.update({
+  id: '/metric/$id',
+  path: '/metric/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,9 +96,13 @@ export interface FileRoutesByFullPath {
   '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
+  '/my-business': typeof MyBusinessRoute
+  '/my-services': typeof MyServicesRoute
   '/notifications': typeof NotificationsRoute
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
+  '/tasks': typeof TasksRoute
+  '/metric/$id': typeof MetricIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,9 +111,13 @@ export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
+  '/my-business': typeof MyBusinessRoute
+  '/my-services': typeof MyServicesRoute
   '/notifications': typeof NotificationsRoute
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
+  '/tasks': typeof TasksRoute
+  '/metric/$id': typeof MetricIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,9 +127,13 @@ export interface FileRoutesById {
   '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
+  '/my-business': typeof MyBusinessRoute
+  '/my-services': typeof MyServicesRoute
   '/notifications': typeof NotificationsRoute
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
+  '/tasks': typeof TasksRoute
+  '/metric/$id': typeof MetricIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,9 +144,13 @@ export interface FileRouteTypes {
     | '/chat'
     | '/insight'
     | '/more'
+    | '/my-business'
+    | '/my-services'
     | '/notifications'
     | '/pro-analytics'
     | '/solutions'
+    | '/tasks'
+    | '/metric/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,9 +159,13 @@ export interface FileRouteTypes {
     | '/chat'
     | '/insight'
     | '/more'
+    | '/my-business'
+    | '/my-services'
     | '/notifications'
     | '/pro-analytics'
     | '/solutions'
+    | '/tasks'
+    | '/metric/$id'
   id:
     | '__root__'
     | '/'
@@ -130,9 +174,13 @@ export interface FileRouteTypes {
     | '/chat'
     | '/insight'
     | '/more'
+    | '/my-business'
+    | '/my-services'
     | '/notifications'
     | '/pro-analytics'
     | '/solutions'
+    | '/tasks'
+    | '/metric/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -142,9 +190,13 @@ export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   InsightRoute: typeof InsightRoute
   MoreRoute: typeof MoreRoute
+  MyBusinessRoute: typeof MyBusinessRoute
+  MyServicesRoute: typeof MyServicesRoute
   NotificationsRoute: typeof NotificationsRoute
   ProAnalyticsRoute: typeof ProAnalyticsRoute
   SolutionsRoute: typeof SolutionsRoute
+  TasksRoute: typeof TasksRoute
+  MetricIdRoute: typeof MetricIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,6 +243,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-business': {
+      id: '/my-business'
+      path: '/my-business'
+      fullPath: '/my-business'
+      preLoaderRoute: typeof MyBusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-services': {
+      id: '/my-services'
+      path: '/my-services'
+      fullPath: '/my-services'
+      preLoaderRoute: typeof MyServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/notifications': {
       id: '/notifications'
       path: '/notifications'
@@ -212,6 +278,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tasks': {
+      id: '/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof TasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metric/$id': {
+      id: '/metric/$id'
+      path: '/metric/$id'
+      fullPath: '/metric/$id'
+      preLoaderRoute: typeof MetricIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -222,9 +302,13 @@ const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   InsightRoute: InsightRoute,
   MoreRoute: MoreRoute,
+  MyBusinessRoute: MyBusinessRoute,
+  MyServicesRoute: MyServicesRoute,
   NotificationsRoute: NotificationsRoute,
   ProAnalyticsRoute: ProAnalyticsRoute,
   SolutionsRoute: SolutionsRoute,
+  TasksRoute: TasksRoute,
+  MetricIdRoute: MetricIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

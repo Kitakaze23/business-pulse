@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Banknote, Wallet, Users, Building2, Lock } from "lucide-react";
+import { Banknote, Wallet, Users, Building2, Lock, Check } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { TabBar } from "@/components/TabBar";
 
@@ -22,7 +22,17 @@ export const Route = createFileRoute("/pro-analytics")({
   }),
 });
 
+const unlocks = [
+  "Структура выручки по каналам и товарам",
+  "Динамика расходов по категориям",
+  "Сегменты клиентов",
+  "Повторные покупки и возвращаемость",
+  "Дополнительные показатели бизнеса",
+  "Более глубокие рекомендации советника",
+];
+
 const features = [
+
   {
     Icon: Banknote,
     title: "Доходы",
@@ -52,13 +62,24 @@ function ProAnalytics() {
         <ScreenHeader title="Детальная аналитика" subtitle="Расширенные данные о бизнесе" />
 
         <div className="space-y-3 p-4">
-          <Card className="text-center">
-            <span className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-secondary text-primary">
+          <Card>
+            <span className="flex size-12 items-center justify-center rounded-2xl bg-secondary text-primary">
               <Lock className="size-5" />
             </span>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Детальная аналитика доступна при подключении Сбер Прайм.
+            <h2 className="mt-3 text-base font-semibold leading-snug">
+              Расширенная аналитика бизнеса
+            </h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              После подключения Сбер Прайм будут доступны:
             </p>
+            <ul className="mt-3 space-y-2">
+              {unlocks.map((u) => (
+                <li key={u} className="flex gap-2 text-sm text-muted-foreground">
+                  <Check className="mt-0.5 size-4 shrink-0 text-primary" />
+                  {u}
+                </li>
+              ))}
+            </ul>
             <button
               type="button"
               className="mt-4 h-11 w-full rounded-xl bg-primary text-sm font-semibold text-primary-foreground"
@@ -66,6 +87,7 @@ function ProAnalytics() {
               Подключить Сбер Прайм
             </button>
           </Card>
+
 
           <Card>
             <h2 className="text-sm font-semibold">Что доступно в разделе</h2>
