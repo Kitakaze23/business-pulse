@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Banknote, Wallet, Users, Building2, Lock } from "lucide-react";
+import { Banknote, Wallet, Users, Building2, Lock, Check } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { TabBar } from "@/components/TabBar";
 
@@ -22,7 +22,17 @@ export const Route = createFileRoute("/pro-analytics")({
   }),
 });
 
+const unlocks = [
+  "Структура выручки по каналам и товарам",
+  "Динамика расходов по категориям",
+  "Сегменты клиентов",
+  "Повторные покупки и возвращаемость",
+  "Дополнительные показатели бизнеса",
+  "Более глубокие рекомендации советника",
+];
+
 const features = [
+
   {
     Icon: Banknote,
     title: "Доходы",
