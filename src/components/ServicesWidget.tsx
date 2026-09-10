@@ -56,13 +56,10 @@ export function LaunchServicesWidget() {
       <Card>
         <h2 className="text-base font-semibold leading-snug">Сервисы для вас</h2>
         <p className="mt-1 text-xs text-muted-foreground">
-          Подобрали всё необходимое для запуска бизнеса.
+          Для первой продажи вам сейчас нужны:
         </p>
 
-        <p className="mt-3 text-xs font-semibold text-muted-foreground">
-          {done} из {items.length} сервисов подключено
-        </p>
-        <ul className="mt-2 space-y-1.5">
+        <ul className="mt-3 space-y-1.5">
           {items.map(({ product, done: isDone }) => (
             <li key={product.id} className="flex items-center gap-2 text-sm">
               {isDone ? (
@@ -75,10 +72,25 @@ export function LaunchServicesWidget() {
           ))}
         </ul>
 
+        <p className="mt-3 text-xs font-semibold text-muted-foreground">
+          {done} из {items.length} сервисов подключено
+        </p>
+
+        <div className="mt-3 rounded-xl bg-secondary p-3">
+          <p className="text-[11px] font-semibold text-muted-foreground">
+            Следующий рекомендуемый шаг
+          </p>
+          <p className="mt-1 text-sm leading-snug">
+            Подключите приём платежей, чтобы быть готовым к первой продаже.
+          </p>
+        </div>
+
         <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm font-semibold text-primary">
-          Открыть витрину
+          Подключить
           <ChevronRight className="size-4 text-muted-foreground" />
         </div>
+      </Card>
+
       </Card>
     </Link>
   );
