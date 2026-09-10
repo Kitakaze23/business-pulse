@@ -45,13 +45,18 @@ function Analytics() {
         }
       />
       <div className="space-y-3 p-4">
-        <Card className="space-y-5">
+        <Card className="p-0">
           {metrics.map((m, i) => {
             const Icon = icons[i] ?? Banknote;
             const bar =
               m.tone === "good" ? "bg-success" : m.tone === "warn" ? "bg-warning" : "bg-danger";
             return (
-              <div key={m.id} className="flex items-center gap-3">
+              <Link
+                key={m.id}
+                to="/metric/$id"
+                params={{ id: m.id }}
+                className="flex items-center gap-3 border-b border-border px-4 py-4 last:border-0"
+              >
                 <span className="flex size-9 items-center justify-center rounded-full bg-secondary">
                   <Icon className="size-4 text-primary" />
                 </span>
@@ -71,10 +76,12 @@ function Analytics() {
                 >
                   {m.delta > 0 ? `+${m.delta}` : m.delta}
                 </span>
-              </div>
+                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+              </Link>
             );
           })}
         </Card>
+
 
         <Card>
           <h2 className="text-sm font-semibold">Что влияет на оценку</h2>
