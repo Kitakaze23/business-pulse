@@ -132,7 +132,7 @@ function MetricScreen() {
           </p>
           <Link
             to="/advisor"
-            search={flow ? { flow: flow.id } : undefined}
+            search={{ flow: flow?.id }}
             className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm font-semibold text-primary"
           >
             Перейти к советнику
