@@ -47,6 +47,14 @@ export const Route = createFileRoute("/bank/")({
 function Bank() {
   const [quick, setQuick] = useState<string[]>(defaultQuickActions);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [outlet, setOutlet] = useState("main");
+
+  const outlets = [
+    { id: "main", label: "Основная точка · ул. Ленина, 12" },
+    { id: "mall", label: "ТЦ «Галерея» · 2 этаж" },
+    { id: "market", label: "Маркетплейс · онлайн" },
+  ];
+  const outletLabel = outlets.find((o) => o.id === outlet)?.label ?? outlets[0]!.label;
 
   useEffect(() => {
     const raw = localStorage.getItem(QUICK_KEY);
