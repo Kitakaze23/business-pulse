@@ -111,7 +111,7 @@ function Bank() {
 
           <Card>
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold">Быстрый доступ</p>
+              <p className="text-sm font-semibold">Под рукой</p>
               <button
                 type="button"
                 onClick={() => setSettingsOpen(true)}
