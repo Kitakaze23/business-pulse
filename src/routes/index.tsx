@@ -176,8 +176,7 @@ function Index() {
           <BusinessLaunch headerRight={headerRight} onGoToPulse={() => setLaunchMode(false)} />
         </div>
         <ChatFab />
-        <ChatFab />
-      <TabBar active="/" />
+        <TabBar active="/" />
       </PhoneShell>
     );
   }
