@@ -111,7 +111,7 @@ function Bank() {
 
           <Card>
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold">Быстрый доступ</p>
+              <p className="text-sm font-semibold">Под рукой</p>
               <button
                 type="button"
                 onClick={() => setSettingsOpen(true)}
@@ -181,7 +181,7 @@ function Bank() {
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-foreground/40">
           <div className="max-h-[80vh] w-full max-w-[430px] overflow-y-auto rounded-t-3xl bg-card p-5">
             <div className="flex items-center justify-between">
-              <p className="text-base font-semibold">Настроить быстрый доступ</p>
+              <p className="text-base font-semibold">Настроить «Под рукой»</p>
               <button type="button" aria-label="Закрыть" onClick={() => setSettingsOpen(false)}>
                 <X className="size-5 text-muted-foreground" />
               </button>
