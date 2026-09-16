@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdvisorRouteImport } from './routes/advisor'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as BankRouteImport } from './routes/bank'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as InsightRouteImport } from './routes/insight'
 import { Route as MoreRouteImport } from './routes/more'
@@ -21,6 +22,7 @@ import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ProAnalyticsRouteImport } from './routes/pro-analytics'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as BankSectionRouteImport } from './routes/bank.$section'
 import { Route as MetricIdRouteImport } from './routes/metric.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -36,6 +38,11 @@ const AdvisorRoute = AdvisorRouteImport.update({
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BankRoute = BankRouteImport.update({
+  id: '/bank',
+  path: '/bank',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatRoute = ChatRouteImport.update({
@@ -83,6 +90,11 @@ const TasksRoute = TasksRouteImport.update({
   path: '/tasks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BankSectionRoute = BankSectionRouteImport.update({
+  id: '/$section',
+  path: '/$section',
+  getParentRoute: () => BankRoute,
+} as any)
 const MetricIdRoute = MetricIdRouteImport.update({
   id: '/metric/$id',
   path: '/metric/$id',
@@ -93,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advisor': typeof AdvisorRoute
   '/analytics': typeof AnalyticsRoute
+  '/bank': typeof BankRouteWithChildren
   '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
@@ -102,12 +115,14 @@ export interface FileRoutesByFullPath {
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
   '/tasks': typeof TasksRoute
+  '/bank/$section': typeof BankSectionRoute
   '/metric/$id': typeof MetricIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advisor': typeof AdvisorRoute
   '/analytics': typeof AnalyticsRoute
+  '/bank': typeof BankRouteWithChildren
   '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
@@ -117,6 +132,7 @@ export interface FileRoutesByTo {
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
   '/tasks': typeof TasksRoute
+  '/bank/$section': typeof BankSectionRoute
   '/metric/$id': typeof MetricIdRoute
 }
 export interface FileRoutesById {
@@ -124,6 +140,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/advisor': typeof AdvisorRoute
   '/analytics': typeof AnalyticsRoute
+  '/bank': typeof BankRouteWithChildren
   '/chat': typeof ChatRoute
   '/insight': typeof InsightRoute
   '/more': typeof MoreRoute
@@ -133,6 +150,7 @@ export interface FileRoutesById {
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
   '/tasks': typeof TasksRoute
+  '/bank/$section': typeof BankSectionRoute
   '/metric/$id': typeof MetricIdRoute
 }
 export interface FileRouteTypes {
@@ -141,6 +159,7 @@ export interface FileRouteTypes {
     | '/'
     | '/advisor'
     | '/analytics'
+    | '/bank'
     | '/chat'
     | '/insight'
     | '/more'
@@ -150,12 +169,14 @@ export interface FileRouteTypes {
     | '/pro-analytics'
     | '/solutions'
     | '/tasks'
+    | '/bank/$section'
     | '/metric/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/advisor'
     | '/analytics'
+    | '/bank'
     | '/chat'
     | '/insight'
     | '/more'
@@ -165,12 +186,14 @@ export interface FileRouteTypes {
     | '/pro-analytics'
     | '/solutions'
     | '/tasks'
+    | '/bank/$section'
     | '/metric/$id'
   id:
     | '__root__'
     | '/'
     | '/advisor'
     | '/analytics'
+    | '/bank'
     | '/chat'
     | '/insight'
     | '/more'
@@ -180,6 +203,7 @@ export interface FileRouteTypes {
     | '/pro-analytics'
     | '/solutions'
     | '/tasks'
+    | '/bank/$section'
     | '/metric/$id'
   fileRoutesById: FileRoutesById
 }
@@ -187,6 +211,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvisorRoute: typeof AdvisorRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  BankRoute: typeof BankRouteWithChildren
   ChatRoute: typeof ChatRoute
   InsightRoute: typeof InsightRoute
   MoreRoute: typeof MoreRoute
@@ -220,6 +245,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/analytics'
       preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bank': {
+      id: '/bank'
+      path: '/bank'
+      fullPath: '/bank'
+      preLoaderRoute: typeof BankRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat': {
@@ -285,6 +317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bank/$section': {
+      id: '/bank/$section'
+      path: '/$section'
+      fullPath: '/bank/$section'
+      preLoaderRoute: typeof BankSectionRouteImport
+      parentRoute: typeof BankRoute
+    }
     '/metric/$id': {
       id: '/metric/$id'
       path: '/metric/$id'
@@ -295,10 +334,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BankRouteChildren {
+  BankSectionRoute: typeof BankSectionRoute
+}
+
+const BankRouteChildren: BankRouteChildren = {
+  BankSectionRoute: BankSectionRoute,
+}
+
+const BankRouteWithChildren = BankRoute._addFileChildren(BankRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvisorRoute: AdvisorRoute,
   AnalyticsRoute: AnalyticsRoute,
+  BankRoute: BankRouteWithChildren,
   ChatRoute: ChatRoute,
   InsightRoute: InsightRoute,
   MoreRoute: MoreRoute,

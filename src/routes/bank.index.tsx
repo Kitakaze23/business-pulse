@@ -13,7 +13,7 @@ import {
 
 const QUICK_KEY = "bp-bank-quick-actions";
 
-export const Route = createFileRoute("/bank")({
+export const Route = createFileRoute("/bank/")({
   component: Bank,
   head: () => ({
     meta: [
