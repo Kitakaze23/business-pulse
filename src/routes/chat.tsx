@@ -99,7 +99,7 @@ function reply(question: string): { text: string; action?: Action } {
 
 const manager = {
   name: "Полякова Елена Викторовна",
-  role: "Клиентский менеджер",
+  role: "Ваш менеджер",
   phones: ["+7 495 500-55-50, доб. 1247", "+7 916 204-71-33"],
 };
 
@@ -196,7 +196,7 @@ function Chat() {
           <div className="flex rounded-full bg-secondary p-1">
             {(
               [
-                { key: "manager", label: "Клиентский менеджер" },
+                { key: "manager", label: "Ваш менеджер" },
                 { key: "ai", label: "ИИ Агент" },
               ] as const
             ).map((t) => (
