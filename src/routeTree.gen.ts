@@ -21,6 +21,8 @@ import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ProAnalyticsRouteImport } from './routes/pro-analytics'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as BankIndexRouteImport } from './routes/bank.index'
+import { Route as BankSectionRouteImport } from './routes/bank.$section'
 import { Route as MetricIdRouteImport } from './routes/metric.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +85,16 @@ const TasksRoute = TasksRouteImport.update({
   path: '/tasks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BankIndexRoute = BankIndexRouteImport.update({
+  id: '/bank/',
+  path: '/bank/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BankSectionRoute = BankSectionRouteImport.update({
+  id: '/bank/$section',
+  path: '/bank/$section',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MetricIdRoute = MetricIdRouteImport.update({
   id: '/metric/$id',
   path: '/metric/$id',
@@ -102,7 +114,9 @@ export interface FileRoutesByFullPath {
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
   '/tasks': typeof TasksRoute
+  '/bank/$section': typeof BankSectionRoute
   '/metric/$id': typeof MetricIdRoute
+  '/bank/': typeof BankIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -117,7 +131,9 @@ export interface FileRoutesByTo {
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
   '/tasks': typeof TasksRoute
+  '/bank/$section': typeof BankSectionRoute
   '/metric/$id': typeof MetricIdRoute
+  '/bank': typeof BankIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -133,7 +149,9 @@ export interface FileRoutesById {
   '/pro-analytics': typeof ProAnalyticsRoute
   '/solutions': typeof SolutionsRoute
   '/tasks': typeof TasksRoute
+  '/bank/$section': typeof BankSectionRoute
   '/metric/$id': typeof MetricIdRoute
+  '/bank/': typeof BankIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -150,7 +168,9 @@ export interface FileRouteTypes {
     | '/pro-analytics'
     | '/solutions'
     | '/tasks'
+    | '/bank/$section'
     | '/metric/$id'
+    | '/bank/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -165,7 +185,9 @@ export interface FileRouteTypes {
     | '/pro-analytics'
     | '/solutions'
     | '/tasks'
+    | '/bank/$section'
     | '/metric/$id'
+    | '/bank'
   id:
     | '__root__'
     | '/'
@@ -180,7 +202,9 @@ export interface FileRouteTypes {
     | '/pro-analytics'
     | '/solutions'
     | '/tasks'
+    | '/bank/$section'
     | '/metric/$id'
+    | '/bank/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -196,7 +220,9 @@ export interface RootRouteChildren {
   ProAnalyticsRoute: typeof ProAnalyticsRoute
   SolutionsRoute: typeof SolutionsRoute
   TasksRoute: typeof TasksRoute
+  BankSectionRoute: typeof BankSectionRoute
   MetricIdRoute: typeof MetricIdRoute
+  BankIndexRoute: typeof BankIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -285,6 +311,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bank/': {
+      id: '/bank/'
+      path: '/bank'
+      fullPath: '/bank/'
+      preLoaderRoute: typeof BankIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bank/$section': {
+      id: '/bank/$section'
+      path: '/bank/$section'
+      fullPath: '/bank/$section'
+      preLoaderRoute: typeof BankSectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/metric/$id': {
       id: '/metric/$id'
       path: '/metric/$id'
@@ -308,7 +348,9 @@ const rootRouteChildren: RootRouteChildren = {
   ProAnalyticsRoute: ProAnalyticsRoute,
   SolutionsRoute: SolutionsRoute,
   TasksRoute: TasksRoute,
+  BankSectionRoute: BankSectionRoute,
   MetricIdRoute: MetricIdRoute,
+  BankIndexRoute: BankIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

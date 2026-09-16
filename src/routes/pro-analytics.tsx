@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Banknote, Wallet, Users, Building2, Lock, Check } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { TabBar } from "@/components/TabBar";
+import { ChatFab } from "@/components/ChatFab";
 
 export const Route = createFileRoute("/pro-analytics")({
   component: ProAnalytics,
@@ -108,6 +109,7 @@ function ProAnalytics() {
         </div>
       </div>
 
+      <ChatFab />
       <TabBar active="/pro-analytics" />
     </PhoneShell>
   );

@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Send } from "lucide-react";
+import { Send, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
-import { TabBar } from "@/components/TabBar";
 
 export const Route = createFileRoute("/chat")({
   component: Chat,
@@ -115,8 +114,16 @@ function Chat() {
 
   return (
     <PhoneShell>
-      <div className="pb-44">
-        <ScreenHeader title="Бизнес Пульс" subtitle="Ваш бизнес-помощник" />
+      <div className="pb-40">
+        <ScreenHeader
+          title="Бизнес Пульс"
+          subtitle="Ваш бизнес-помощник"
+          left={
+            <Link to="/" aria-label="Назад">
+              <ChevronLeft className="size-5" />
+            </Link>
+          }
+        />
 
         <div className="space-y-3 p-4">
           {messages.map((m) => (
@@ -147,7 +154,7 @@ function Chat() {
         </div>
       </div>
 
-      <div className="fixed bottom-[62px] left-1/2 z-20 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-card px-4 py-3">
+      <div className="fixed bottom-0 left-1/2 z-20 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-card px-4 py-3">
         <div className="mb-2 flex gap-2 overflow-x-auto pb-1">
           {suggestions.map((s) => (
             <button
@@ -180,7 +187,6 @@ function Chat() {
         </div>
       </div>
 
-      <TabBar active="/chat" />
     </PhoneShell>
   );
 }

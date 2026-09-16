@@ -1,13 +1,15 @@
 import { Link } from "@tanstack/react-router";
-import { MessageCircle, Activity, BarChart3 } from "lucide-react";
+import { Landmark, Activity, BarChart3 } from "lucide-react";
 
 const tabs = [
-  { to: "/chat", label: "Чат", Icon: MessageCircle },
+  { to: "/bank", label: "Банк", Icon: Landmark },
   { to: "/", label: "Пульс", Icon: Activity },
   { to: "/pro-analytics", label: "Аналитика", Icon: BarChart3 },
 ] as const;
 
-export function TabBar({ active }: { active: "/chat" | "/" | "/pro-analytics" }) {
+export type TabKey = (typeof tabs)[number]["to"];
+
+export function TabBar({ active }: { active: TabKey }) {
   return (
     <nav className="fixed bottom-0 left-1/2 z-20 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-card pb-[env(safe-area-inset-bottom)]">
       <ul className="flex">

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const LAUNCH_MODE_KEY = "bp-launch-mode";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { TabBar } from "@/components/TabBar";
+import { ChatFab } from "@/components/ChatFab";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
 import { ServicesWidget } from "@/components/ServicesWidget";
 import { pulse, insight, recommendations } from "@/lib/business-data";
@@ -174,6 +175,7 @@ function Index() {
         <div className="animate-in fade-in pb-24 duration-300">
           <BusinessLaunch headerRight={headerRight} onGoToPulse={() => setLaunchMode(false)} />
         </div>
+        <ChatFab />
         <TabBar active="/" />
       </PhoneShell>
     );
@@ -249,6 +251,7 @@ function Index() {
         <ServicesWidget />
       </div>
       </div>
+      <ChatFab />
       <TabBar active="/" />
     </PhoneShell>
   );
