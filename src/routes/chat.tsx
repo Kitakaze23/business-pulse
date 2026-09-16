@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Send, ChevronLeft } from "lucide-react";
+import { Send, ChevronLeft, X, Phone, Star } from "lucide-react";
 import { useState } from "react";
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
+import managerAvatar from "@/assets/manager-avatar.jpg";
 
 export const Route = createFileRoute("/chat")({
   component: Chat,
