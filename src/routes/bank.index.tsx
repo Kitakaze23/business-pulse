@@ -82,6 +82,44 @@ function Bank() {
         <ScreenHeader title="Банк" subtitle="Деньги и операции бизнеса" />
 
         <div className="space-y-3 p-4">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2.5 rounded-2xl bg-card px-3.5 py-2.5 shadow-sm">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <Building2 className="size-5" />
+              </span>
+              <div className="flex-1 leading-tight">
+                <p className="text-[11px] text-muted-foreground">Организация</p>
+                <p className="text-sm font-semibold">ООО «Ромашка»</p>
+              </div>
+              <ChevronRight className="size-4 text-muted-foreground" />
+            </div>
+
+            <div className="flex items-center gap-2.5 rounded-2xl bg-card px-3.5 py-2.5 shadow-sm">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-secondary text-foreground">
+                <MapPin className="size-5" />
+              </span>
+              <div className="flex-1 leading-tight">
+                <p className="text-[11px] text-muted-foreground">Торговая точка</p>
+                <p className="text-sm font-medium">{outletLabel}</p>
+              </div>
+              <div className="relative">
+                <select
+                  value={outlet}
+                  onChange={(e) => setOutlet(e.target.value)}
+                  aria-label="Выбор торговой точки"
+                  className="appearance-none rounded-xl bg-secondary py-2 pl-3 pr-8 text-xs font-medium text-foreground outline-none"
+                >
+                  {outlets.map((o) => (
+                    <option key={o.id} value={o.id}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+              </div>
+            </div>
+          </div>
+
           <Card>
             <p className="text-xs text-muted-foreground">{bankAccount.title}</p>
             <p className="mt-1 text-3xl font-bold tracking-tight">{bankAccount.balance}</p>
