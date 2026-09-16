@@ -82,8 +82,8 @@ function Bank() {
         <ScreenHeader title="Банк" subtitle="Деньги и операции бизнеса" />
 
         <div className="space-y-3 p-4">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2.5 rounded-2xl bg-card px-3.5 py-2.5 shadow-sm">
+          <div className="rounded-2xl bg-card p-3.5 shadow-sm">
+            <div className="flex items-center gap-2.5">
               <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <Building2 className="size-5" />
               </span>
@@ -94,7 +94,7 @@ function Bank() {
               <ChevronRight className="size-4 text-muted-foreground" />
             </div>
 
-            <div className="flex items-center gap-2.5 rounded-2xl bg-card px-3.5 py-2.5 shadow-sm">
+            <div className="mt-2.5 flex items-center gap-2.5 border-t border-border pt-2.5">
               <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-secondary text-foreground">
                 <MapPin className="size-5" />
               </span>
