@@ -1,6 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ChevronRight, FileText, Plus, Settings2, Send, ArrowDownLeft, X, Check } from "lucide-react";
+import {
+  Building2,
+  ChevronDown,
+  ChevronRight,
+  FileText,
+  MapPin,
+  Plus,
+  Settings2,
+  Send,
+  ArrowDownLeft,
+  X,
+  Check,
+} from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
