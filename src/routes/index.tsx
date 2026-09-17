@@ -7,6 +7,7 @@ import { PhoneShell, Card } from "@/components/PhoneShell";
 import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
+import { PullerFab } from "@/components/PullerFab";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
 import { ServicesWidget } from "@/components/ServicesWidget";
 import { pulse } from "@/lib/business-data";
@@ -180,6 +181,7 @@ function Index() {
         <div className="animate-in fade-in pb-24 duration-300">
           <BusinessLaunch headerRight={headerRight} onGoToPulse={() => setLaunchMode(false)} />
         </div>
+        <PullerFab />
         <ChatFab />
         <TabBar active="/" />
       </PhoneShell>
@@ -193,11 +195,25 @@ function Index() {
 
       <div className="space-y-3 p-4">
         <Card className="py-6">
-          <Link to="/analytics" aria-label="Здоровье бизнеса" className="block">
+          <Link
+            to="/analytics"
+            aria-label="Здоровье бизнеса"
+            className="group block rounded-2xl transition-colors hover:bg-secondary/50 active:scale-[0.99]"
+          >
             <ScoreRing score={pulse.score} />
+            <span className="mt-3 flex items-center justify-center gap-1 text-xs font-medium text-primary">
+              Здоровье бизнеса <ChevronRight className="size-3.5" />
+            </span>
           </Link>
-          <Link to="/my-business" aria-label="Мой бизнес" className="block">
+          <Link
+            to="/my-business"
+            aria-label="Мой бизнес"
+            className="group mt-2 block rounded-2xl pb-1 transition-colors hover:bg-secondary/50 active:scale-[0.99]"
+          >
             <LevelProgress />
+            <span className="mt-3 flex items-center justify-center gap-1 text-xs font-medium text-primary">
+              Мой бизнес: стадия и задачи <ChevronRight className="size-3.5" />
+            </span>
           </Link>
         </Card>
 
@@ -221,6 +237,7 @@ function Index() {
         <ServicesWidget />
       </div>
       </div>
+      <PullerFab />
       <ChatFab />
       <TabBar active="/" />
     </PhoneShell>
