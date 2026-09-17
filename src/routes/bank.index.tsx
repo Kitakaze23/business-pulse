@@ -1,31 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Building2,
   ChevronDown,
   ChevronRight,
   FileText,
   MapPin,
-  Plus,
-  Settings2,
   Send,
   ArrowDownLeft,
-  X,
-  Check,
 } from "lucide-react";
 import { PhoneShell, Card } from "@/components/PhoneShell";
 import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
 import { PullerFab } from "@/components/PullerFab";
-import {
-  bankAccount,
-  bankGroups,
-  defaultQuickActions,
-  quickActionCatalog,
-} from "@/lib/bank-data";
-
-const QUICK_KEY = "bp-bank-quick-actions";
+import { bankAccount, bankGroups } from "@/lib/bank-data";
 
 export const Route = createFileRoute("/bank/")({
   component: Bank,
