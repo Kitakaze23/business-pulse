@@ -1,31 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Building2,
   ChevronDown,
   ChevronRight,
   FileText,
   MapPin,
-  Plus,
-  Settings2,
   Send,
   ArrowDownLeft,
-  X,
-  Check,
 } from "lucide-react";
 import { PhoneShell, Card } from "@/components/PhoneShell";
 import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
 import { PullerFab } from "@/components/PullerFab";
-import {
-  bankAccount,
-  bankGroups,
-  defaultQuickActions,
-  quickActionCatalog,
-} from "@/lib/bank-data";
-
-const QUICK_KEY = "bp-bank-quick-actions";
+import { bankAccount, bankGroups } from "@/lib/bank-data";
 
 export const Route = createFileRoute("/bank/")({
   component: Bank,
@@ -47,8 +36,6 @@ export const Route = createFileRoute("/bank/")({
 });
 
 function Bank() {
-  const [quick, setQuick] = useState<string[]>(defaultQuickActions);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const [outlet, setOutlet] = useState("main");
 
   const outlets = [
@@ -57,26 +44,6 @@ function Bank() {
     { id: "market", label: "Маркетплейс · онлайн" },
   ];
   const outletLabel = outlets.find((o) => o.id === outlet)?.label ?? outlets[0]!.label;
-
-  useEffect(() => {
-    const raw = localStorage.getItem(QUICK_KEY);
-    if (!raw) return;
-    try {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.every((x) => typeof x === "string")) setQuick(parsed);
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
-  const save = (next: string[]) => {
-    setQuick(next);
-    localStorage.setItem(QUICK_KEY, JSON.stringify(next));
-  };
-
-  const quickItems = quick
-    .map((id) => quickActionCatalog.find((a) => a.id === id))
-    .filter((a): a is (typeof quickActionCatalog)[number] => Boolean(a));
 
   return (
     <PhoneShell>
@@ -169,46 +136,6 @@ function Bank() {
             </div>
           </Card>
 
-          <Card>
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold">Под рукой</p>
-              <button
-                type="button"
-                onClick={() => setSettingsOpen(true)}
-                className="flex items-center gap-1 text-xs font-medium text-primary"
-              >
-                <Settings2 className="size-4" /> Настроить
-              </button>
-            </div>
-            <div className="mt-3 grid grid-cols-4 gap-2">
-              {quickItems.map(({ id, label, Icon, target }) => (
-                <Link
-                  key={id}
-                  to="/bank/$section"
-                  params={{ section: target }}
-                  className="flex flex-col items-center gap-1.5 text-center"
-                >
-                  <span className="flex size-12 items-center justify-center rounded-2xl bg-secondary text-foreground">
-                    <Icon className="size-5" />
-                  </span>
-                  <span className="text-[10px] leading-tight text-muted-foreground">{label}</span>
-                </Link>
-              ))}
-              {quickItems.length < 8 && (
-                <button
-                  type="button"
-                  onClick={() => setSettingsOpen(true)}
-                  className="flex flex-col items-center gap-1.5 text-center"
-                >
-                  <span className="flex size-12 items-center justify-center rounded-2xl border border-dashed border-border text-muted-foreground">
-                    <Plus className="size-5" />
-                  </span>
-                  <span className="text-[10px] leading-tight text-muted-foreground">Добавить</span>
-                </button>
-              )}
-            </div>
-          </Card>
-
           {bankGroups.map((group) => (
             <Card key={group.id}>
               <p className="text-sm font-semibold">{group.title}</p>
@@ -236,89 +163,6 @@ function Bank() {
           ))}
         </div>
       </div>
-
-      {settingsOpen && (
-        <div className="fixed inset-0 z-40 flex items-end justify-center bg-foreground/40">
-          <div className="max-h-[80vh] w-full max-w-[430px] overflow-y-auto rounded-t-3xl bg-card p-5">
-            <div className="flex items-center justify-between">
-              <p className="text-base font-semibold">Настроить «Под рукой»</p>
-              <button type="button" aria-label="Закрыть" onClick={() => setSettingsOpen(false)}>
-                <X className="size-5 text-muted-foreground" />
-              </button>
-            </div>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Выберите действия и задайте порядок — настройки сохранятся.
-            </p>
-
-            <ul className="mt-4 space-y-2">
-              {quickActionCatalog.map(({ id, label, Icon }) => {
-                const index = quick.indexOf(id);
-                const selected = index >= 0;
-                return (
-                  <li
-                    key={id}
-                    className="flex items-center gap-3 rounded-2xl border border-border px-3 py-2.5"
-                  >
-                    <Icon className="size-4 text-muted-foreground" />
-                    <span className="flex-1 text-sm">{label}</span>
-                    {selected && (
-                      <span className="flex gap-1">
-                        <button
-                          type="button"
-                          aria-label="Выше"
-                          disabled={index === 0}
-                          onClick={() => {
-                            const next = [...quick];
-                            [next[index - 1], next[index]] = [next[index]!, next[index - 1]!];
-                            save(next);
-                          }}
-                          className="rounded-lg bg-secondary px-2 py-1 text-xs disabled:opacity-40"
-                        >
-                          ↑
-                        </button>
-                        <button
-                          type="button"
-                          aria-label="Ниже"
-                          disabled={index === quick.length - 1}
-                          onClick={() => {
-                            const next = [...quick];
-                            [next[index + 1], next[index]] = [next[index]!, next[index + 1]!];
-                            save(next);
-                          }}
-                          className="rounded-lg bg-secondary px-2 py-1 text-xs disabled:opacity-40"
-                        >
-                          ↓
-                        </button>
-                      </span>
-                    )}
-                    <button
-                      type="button"
-                      aria-pressed={selected}
-                      aria-label={selected ? `Убрать ${label}` : `Добавить ${label}`}
-                      onClick={() =>
-                        save(selected ? quick.filter((q) => q !== id) : [...quick, id])
-                      }
-                      className={`flex size-7 items-center justify-center rounded-full ${
-                        selected ? "bg-primary text-primary-foreground" : "bg-secondary"
-                      }`}
-                    >
-                      {selected ? <Check className="size-4" /> : <Plus className="size-4" />}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <button
-              type="button"
-              onClick={() => setSettingsOpen(false)}
-              className="mt-4 w-full rounded-xl bg-primary py-3 text-sm font-semibold text-primary-foreground"
-            >
-              Готово
-            </button>
-          </div>
-        </div>
-      )}
 
       <PullerFab />
       <ChatFab />
