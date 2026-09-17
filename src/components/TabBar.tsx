@@ -4,8 +4,8 @@ import { Landmark, Activity, BarChart3, MessageCircle } from "lucide-react";
 const tabs = [
   { to: "/bank", label: "Банк", Icon: Landmark },
   { to: "/", label: "Пульс", Icon: Activity },
-  { to: "/chat", label: "Чат", Icon: MessageCircle },
   { to: "/pro-analytics", label: "Аналитика", Icon: BarChart3 },
+  { to: "/chat", label: "Чат", Icon: MessageCircle },
 ] as const;
 
 export type TabKey = (typeof tabs)[number]["to"];
