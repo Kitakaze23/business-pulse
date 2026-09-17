@@ -118,18 +118,33 @@ function Solutions() {
           </Card>
         )}
 
-        <p className="px-1 pt-2 text-xs font-semibold text-muted-foreground">Каталог сервисов</p>
-        <CategoryFilter value={category} onChange={setCategory} />
-        <div className="space-y-3">
-          {catalog.map((p) => (
-            <ProductCard key={p.id} product={p} onOpen={setOpen} />
-          ))}
-          {catalog.length === 0 && (
-            <Card>
-              <p className="text-sm text-muted-foreground">В этой категории пока нет сервисов.</p>
-            </Card>
-          )}
-        </div>
+        <button
+          type="button"
+          onClick={() => setCatalogOpen((v) => !v)}
+          aria-expanded={catalogOpen}
+          className="flex w-full items-center justify-between rounded-2xl bg-card px-4 py-3 text-left shadow-card"
+        >
+          <span className="text-sm font-semibold">Каталог сервисов</span>
+          <ChevronDown
+            className={`size-4 text-muted-foreground transition-transform ${
+              catalogOpen ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+
+        {catalogOpen && (
+          <div className="space-y-3">
+            <CategoryFilter value={category} onChange={setCategory} />
+            {catalog.map((p) => (
+              <ProductCard key={p.id} product={p} onOpen={setOpen} />
+            ))}
+            {catalog.length === 0 && (
+              <Card>
+                <p className="text-sm text-muted-foreground">В этой категории пока нет сервисов.</p>
+              </Card>
+            )}
+          </div>
+        )}
       </div>
       {open && <ProductModal product={open} onClose={() => setOpen(null)} />}
     </PhoneShell>
