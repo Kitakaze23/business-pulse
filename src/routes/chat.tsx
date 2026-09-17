@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Send, ChevronLeft, X, Phone, Star } from "lucide-react";
 import { useState } from "react";
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
+import { TabBar } from "@/components/TabBar";
 import managerAvatar from "@/assets/manager-avatar.jpg";
 
 export const Route = createFileRoute("/chat")({
@@ -163,7 +164,7 @@ function Chat() {
 
   return (
     <PhoneShell>
-      <div className="pb-40">
+      <div className="pb-52">
         <ScreenHeader
           title="Помощник"
           subtitle={isAi ? "Ваш бизнес-помощник" : manager.role}
@@ -280,7 +281,7 @@ function Chat() {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-1/2 z-20 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-card px-4 py-3">
+      <div className="fixed bottom-[58px] left-1/2 z-20 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-card px-4 py-3">
         <div className="mb-2 flex gap-2 overflow-x-auto pb-1">
           {(isAi ? suggestions : managerSuggestions).map((s) => (
             <button
@@ -377,6 +378,7 @@ function Chat() {
           </div>
         </div>
       )}
+      <TabBar active="/chat" />
     </PhoneShell>
   );
 }
