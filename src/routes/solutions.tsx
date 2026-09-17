@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
 import {
   CategoryFilter,
@@ -45,6 +45,7 @@ function Solutions() {
   const isLaunch = mode === "launch";
   const [open, setOpen] = useState<Product | null>(null);
   const [category, setCategory] = useState<ProductCategory | "all">("all");
+  const [catalogOpen, setCatalogOpen] = useState(false);
 
   const personal = useMemo(() => {
     const ids = isLaunch ? launchServiceOrder.slice(0, 3) : pulseScenarios[0]!.recommended;
