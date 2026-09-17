@@ -129,7 +129,7 @@ const money = (v: number) => `${v.toLocaleString("ru-RU")} ₽`;
 
 function RevenueChart() {
   const [period, setPeriod] = useState<(typeof revenuePeriods)[number]["key"]>("week");
-  const current = revenuePeriods.find((p) => p.key === period)!;
+  const current = revenuePeriods.find((p) => p.key === period) ?? revenuePeriods[0];
   const totals = current.bars.map((b) => b.cash + b.acquiring);
   const max = Math.max(...totals);
   const cashTotal = current.bars.reduce((s, b) => s + b.cash, 0);
