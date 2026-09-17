@@ -165,7 +165,7 @@ function Chat() {
     <PhoneShell>
       <div className="pb-40">
         <ScreenHeader
-          title="Бизнес Пульс"
+          title="Помощник"
           subtitle={isAi ? "Ваш бизнес-помощник" : manager.role}
           left={
             <Link to="/" aria-label="Назад">
