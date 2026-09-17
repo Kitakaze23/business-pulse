@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Landmark, Activity, BarChart3 } from "lucide-react";
+import { Landmark, Activity, BarChart3, MessageCircle } from "lucide-react";
 
 const tabs = [
   { to: "/bank", label: "Банк", Icon: Landmark },
   { to: "/", label: "Пульс", Icon: Activity },
+  { to: "/chat", label: "Чат", Icon: MessageCircle },
   { to: "/pro-analytics", label: "Аналитика", Icon: BarChart3 },
 ] as const;
 
