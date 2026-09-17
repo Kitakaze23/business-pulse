@@ -163,19 +163,28 @@ function RevenueChart() {
         ))}
       </div>
 
-      <div className="mt-4 flex h-40 items-end gap-2">
-        {current.bars.map((b) => (
-          <div key={b.label} className="flex flex-1 flex-col items-center gap-1.5">
-            <span className="text-[9px] text-muted-foreground">
-              {Math.round(b.value / 1000)}к
-            </span>
-            <div
-              className="w-full rounded-t-lg bg-primary/85"
-              style={{ height: `${Math.max(8, (b.value / max) * 118)}px` }}
-            />
-            <span className="text-[10px] text-muted-foreground">{b.label}</span>
-          </div>
-        ))}
+      <div className={`mt-4 flex h-40 items-end ${current.bars.length > 12 ? "gap-0.5" : "gap-2"}`}>
+        {current.bars.map((b, i) => {
+          const dense = current.bars.length > 12;
+          const step = current.bars.length > 20 ? 4 : 2;
+          const showLabel = !dense || i % step === 0;
+          return (
+            <div key={b.label} className="flex min-w-0 flex-1 flex-col items-center gap-1.5">
+              {!dense && (
+                <span className="text-[9px] text-muted-foreground">
+                  {Math.round(b.value / 1000)}к
+                </span>
+              )}
+              <div
+                className={`w-full ${dense ? "rounded-t-sm" : "rounded-t-lg"} ${b.value === 0 ? "bg-border" : "bg-primary/85"}`}
+                style={{ height: `${Math.max(4, (b.value / max) * 118)}px` }}
+              />
+              <span className="text-[10px] text-muted-foreground">
+                {showLabel ? b.label : ""}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </Card>
   );
