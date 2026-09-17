@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { Bell, UserRound } from "lucide-react";
 import { ScreenHeader } from "@/components/PhoneShell";
 import { pulse } from "@/lib/business-data";
 
-export function AppHeader({ rightExtra }: { rightExtra?: React.ReactNode }) {
+export function AppHeader({ rightExtra }: { rightExtra?: ReactNode }) {
   return (
     <ScreenHeader
       title="Отраслевой банк"
