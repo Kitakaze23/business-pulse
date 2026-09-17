@@ -182,12 +182,7 @@ function RevenueChart() {
           const step = current.bars.length > 20 ? 4 : 2;
           const showLabel = !dense || i % step === 0;
           return (
-            <div key={b.label} className="flex min-w-0 flex-1 flex-col items-center gap-1.5">
-              {!dense && (
-                <span className="text-[9px] text-muted-foreground">
-                  {Math.round((b.cash + b.acquiring) / 1000)}к
-                </span>
-              )}
+            <div key={b.label} className="flex min-w-0 flex-1 flex-col items-center gap-1">
               <div
                 className={`flex w-full flex-col-reverse overflow-hidden ${dense ? "rounded-t-sm" : "rounded-t-lg"} ${b.future ? "bg-border" : "bg-secondary"}`}
                 style={{ height: `${Math.max(4, ((b.cash + b.acquiring) / max) * 118)}px` }}
@@ -208,6 +203,11 @@ function RevenueChart() {
               <span className="text-[10px] text-muted-foreground">
                 {showLabel ? b.label : ""}
               </span>
+              {!dense && (
+                <span className="text-[9px] text-muted-foreground">
+                  {Math.round((b.cash + b.acquiring) / 1000)}к
+                </span>
+              )}
             </div>
           );
         })}
