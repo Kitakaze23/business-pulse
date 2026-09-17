@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
-import { ChatFab } from "@/components/ChatFab";
 import { findBankItem } from "@/lib/bank-data";
 
 export const Route = createFileRoute("/bank/$section")({
@@ -41,7 +40,6 @@ function BankSection() {
             <p className="text-sm text-muted-foreground">Этот банковский раздел недоступен.</p>
           </Card>
         </div>
-        <ChatFab />
       </PhoneShell>
     );
   }
@@ -88,7 +86,6 @@ function BankSection() {
           </p>
         </div>
       </div>
-      <ChatFab />
     </PhoneShell>
   );
 }

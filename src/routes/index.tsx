@@ -6,8 +6,6 @@ const LAUNCH_MODE_KEY = "bp-launch-mode";
 import { PhoneShell, Card } from "@/components/PhoneShell";
 import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
-import { ChatFab } from "@/components/ChatFab";
-import { PullerFab } from "@/components/PullerFab";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
 import { ServicesWidget } from "@/components/ServicesWidget";
 import { pulse } from "@/lib/business-data";
@@ -181,8 +179,6 @@ function Index() {
         <div className="animate-in fade-in pb-24 duration-300">
           <BusinessLaunch headerRight={headerRight} onGoToPulse={() => setLaunchMode(false)} />
         </div>
-        <PullerFab />
-        <ChatFab />
         <TabBar active="/" />
       </PhoneShell>
     );
@@ -237,8 +233,6 @@ function Index() {
         <ServicesWidget />
       </div>
       </div>
-      <PullerFab />
-      <ChatFab />
       <TabBar active="/" />
     </PhoneShell>
   );
