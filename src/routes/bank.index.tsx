@@ -13,7 +13,8 @@ import {
   X,
   Check,
 } from "lucide-react";
-import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
+import { PhoneShell, Card } from "@/components/PhoneShell";
+import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
 import {
@@ -79,7 +80,7 @@ function Bank() {
   return (
     <PhoneShell>
       <div className="pb-28">
-        <ScreenHeader title="Банк" subtitle="Деньги и операции бизнеса" />
+        <AppHeader />
 
         <div className="space-y-3 p-4">
           <div className="rounded-2xl bg-card p-3.5 shadow-sm">
