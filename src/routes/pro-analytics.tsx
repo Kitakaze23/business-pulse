@@ -4,6 +4,7 @@ import { PhoneShell, Card } from "@/components/PhoneShell";
 import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
+import { PullerFab } from "@/components/PullerFab";
 
 export const Route = createFileRoute("/pro-analytics")({
   component: ProAnalytics,
@@ -110,6 +111,7 @@ function ProAnalytics() {
         </div>
       </div>
 
+      <PullerFab />
       <ChatFab />
       <TabBar active="/pro-analytics" />
     </PhoneShell>
