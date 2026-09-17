@@ -132,9 +132,8 @@ function Index() {
     });
   };
 
-  const headerRight = (
-    <span className="flex items-center gap-3">
-      <button
+  const launchSwitch = (
+    <button
         type="button"
         role="switch"
         aria-checked={launchMode}
