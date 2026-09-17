@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Banknote, Wallet, Users, Building2, Lock, Check } from "lucide-react";
-import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
+import { PhoneShell, Card } from "@/components/PhoneShell";
+import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
 
@@ -60,7 +61,7 @@ function ProAnalytics() {
   return (
     <PhoneShell>
       <div className="pb-28">
-        <ScreenHeader title="Детальная аналитика" subtitle="Расширенные данные о бизнесе" />
+        <AppHeader />
 
         <div className="space-y-3 p-4">
           <Card>

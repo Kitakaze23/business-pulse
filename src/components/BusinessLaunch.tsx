@@ -447,7 +447,7 @@ export function BusinessLaunch({
   return (
     <>
       <ScreenHeader
-        title="Бизнес Пульс"
+        title="Отраслевой банк"
         subtitle="Режим «Новый бизнес»"
         right={headerRight}
       />
