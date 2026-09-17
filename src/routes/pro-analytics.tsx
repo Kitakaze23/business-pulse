@@ -63,14 +63,9 @@ const revenuePeriods = [
     label: "День",
     hint: "по часам, сегодня",
     bars: [
-      { label: "09", value: 4200 },
-      { label: "11", value: 9800 },
-      { label: "13", value: 15600 },
-      { label: "15", value: 12400 },
-      { label: "17", value: 18200 },
-      { label: "19", value: 11500 },
-      { label: "21", value: 6100 },
-    ],
+      1800, 1400, 1100, 900, 800, 1200, 2600, 4800, 7400, 9800, 12400, 15600,
+      18200, 16900, 14200, 12800, 15600, 18900, 17400, 13600, 9800, 6400, 3600, 2200,
+    ].map((v, i) => ({ label: String(i), value: v })),
   },
   {
     key: "week",
@@ -89,13 +84,14 @@ const revenuePeriods = [
   {
     key: "month",
     label: "Месяц",
-    hint: "по неделям, сентябрь",
+    hint: "по дням, сентябрь",
     bars: [
-      { label: "1 нед", value: 196000 },
-      { label: "2 нед", value: 214500 },
-      { label: "3 нед", value: 231800 },
-      { label: "4 нед", value: 220100 },
-    ],
+      62000, 71500, 68400, 84200, 96800, 112300, 74600,
+      64200, 73800, 70100, 86900, 99400, 115800, 76200,
+      66800, 75200, 72600, 88300, 101200, 118400, 78900,
+      69400, 76900, 74800, 90100, 103800, 121200, 81300,
+      72100, 78400,
+    ].map((v, i) => ({ label: String(i + 1), value: v })),
   },
   {
     key: "quarter",
@@ -110,12 +106,20 @@ const revenuePeriods = [
   {
     key: "year",
     label: "Год",
-    hint: "по кварталам, 2026",
+    hint: "по месяцам, 2026",
     bars: [
-      { label: "I", value: 1980000 },
-      { label: "II", value: 2240000 },
-      { label: "III", value: 2410800 },
-      { label: "IV", value: 1120000 },
+      { label: "Янв", value: 586000 },
+      { label: "Фев", value: 612000 },
+      { label: "Мар", value: 704000 },
+      { label: "Апр", value: 698000 },
+      { label: "Май", value: 746000 },
+      { label: "Июн", value: 796000 },
+      { label: "Июл", value: 742000 },
+      { label: "Авг", value: 806400 },
+      { label: "Сен", value: 862400 },
+      { label: "Окт", value: 0 },
+      { label: "Ноя", value: 0 },
+      { label: "Дек", value: 0 },
     ],
   },
 ] as const;
@@ -159,19 +163,28 @@ function RevenueChart() {
         ))}
       </div>
 
-      <div className="mt-4 flex h-40 items-end gap-2">
-        {current.bars.map((b) => (
-          <div key={b.label} className="flex flex-1 flex-col items-center gap-1.5">
-            <span className="text-[9px] text-muted-foreground">
-              {Math.round(b.value / 1000)}к
-            </span>
-            <div
-              className="w-full rounded-t-lg bg-primary/85"
-              style={{ height: `${Math.max(8, (b.value / max) * 118)}px` }}
-            />
-            <span className="text-[10px] text-muted-foreground">{b.label}</span>
-          </div>
-        ))}
+      <div className={`mt-4 flex h-40 items-end ${current.bars.length > 12 ? "gap-0.5" : "gap-2"}`}>
+        {current.bars.map((b, i) => {
+          const dense = current.bars.length > 12;
+          const step = current.bars.length > 20 ? 4 : 2;
+          const showLabel = !dense || i % step === 0;
+          return (
+            <div key={b.label} className="flex min-w-0 flex-1 flex-col items-center gap-1.5">
+              {!dense && (
+                <span className="text-[9px] text-muted-foreground">
+                  {Math.round(b.value / 1000)}к
+                </span>
+              )}
+              <div
+                className={`w-full ${dense ? "rounded-t-sm" : "rounded-t-lg"} ${b.value === 0 ? "bg-border" : "bg-primary/85"}`}
+                style={{ height: `${Math.max(4, (b.value / max) * 118)}px` }}
+              />
+              <span className="text-[10px] text-muted-foreground">
+                {showLabel ? b.label : ""}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </Card>
   );
