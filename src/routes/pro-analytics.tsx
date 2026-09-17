@@ -57,70 +57,71 @@ const features = [
   },
 ];
 
+type RevenueBar = { label: string; cash: number; acquiring: number; future?: boolean };
+
+const splitRevenue = (values: number[], labels: string[], cashShare: number): RevenueBar[] =>
+  values.map((value, i) => ({
+    label: labels[i] ?? String(i + 1),
+    cash: Math.round(value * cashShare),
+    acquiring: value - Math.round(value * cashShare),
+    future: value === 0,
+  }));
+
 const revenuePeriods = [
   {
     key: "day",
     label: "День",
     hint: "по часам, сегодня",
-    bars: [
-      1800, 1400, 1100, 900, 800, 1200, 2600, 4800, 7400, 9800, 12400, 15600,
-      18200, 16900, 14200, 12800, 15600, 18900, 17400, 13600, 9800, 6400, 3600, 2200,
-    ].map((v, i) => ({ label: String(i), value: v })),
+    bars: splitRevenue(
+      [
+        1800, 1400, 1100, 900, 800, 1200, 2600, 4800, 7400, 9800, 12400, 15600,
+        18200, 16900, 14200, 12800, 15600, 18900, 17400, 13600, 9800, 6400, 3600, 2200,
+      ],
+      Array.from({ length: 24 }, (_, i) => String(i)),
+      0.42
+    ),
   },
   {
     key: "week",
     label: "Неделя",
     hint: "по дням, текущая неделя",
-    bars: [
-      { label: "Пн", value: 62000 },
-      { label: "Вт", value: 71500 },
-      { label: "Ср", value: 68400 },
-      { label: "Чт", value: 84200 },
-      { label: "Пт", value: 96800 },
-      { label: "Сб", value: 112300 },
-      { label: "Вс", value: 74600 },
-    ],
+    bars: splitRevenue(
+      [62000, 71500, 68400, 84200, 96800, 112300, 74600],
+      ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+      0.38
+    ),
   },
   {
     key: "month",
     label: "Месяц",
     hint: "по дням, сентябрь",
-    bars: [
-      62000, 71500, 68400, 84200, 96800, 112300, 74600,
-      64200, 73800, 70100, 86900, 99400, 115800, 76200,
-      66800, 75200, 72600, 88300, 101200, 118400, 78900,
-      69400, 76900, 74800, 90100, 103800, 121200, 81300,
-      72100, 78400,
-    ].map((v, i) => ({ label: String(i + 1), value: v })),
+    bars: splitRevenue(
+      [
+        62000, 71500, 68400, 84200, 96800, 112300, 74600,
+        64200, 73800, 70100, 86900, 99400, 115800, 76200,
+        66800, 75200, 72600, 88300, 101200, 118400, 78900,
+        69400, 76900, 74800, 90100, 103800, 121200, 81300,
+        72100, 78400,
+      ],
+      Array.from({ length: 30 }, (_, i) => String(i + 1)),
+      0.35
+    ),
   },
   {
     key: "quarter",
     label: "Квартал",
     hint: "по месяцам, III квартал",
-    bars: [
-      { label: "Июл", value: 742000 },
-      { label: "Авг", value: 806400 },
-      { label: "Сен", value: 862400 },
-    ],
+    bars: splitRevenue([742000, 806400, 862400], ["Июл", "Авг", "Сен"], 0.36),
   },
   {
     key: "year",
     label: "Год",
     hint: "по месяцам, 2026",
-    bars: [
-      { label: "Янв", value: 586000 },
-      { label: "Фев", value: 612000 },
-      { label: "Мар", value: 704000 },
-      { label: "Апр", value: 698000 },
-      { label: "Май", value: 746000 },
-      { label: "Июн", value: 796000 },
-      { label: "Июл", value: 742000 },
-      { label: "Авг", value: 806400 },
-      { label: "Сен", value: 862400 },
-      { label: "Окт", value: 0 },
-      { label: "Ноя", value: 0 },
-      { label: "Дек", value: 0 },
-    ],
+    bars: splitRevenue(
+      [586000, 612000, 704000, 698000, 746000, 796000, 742000, 806400, 862400, 0, 0, 0],
+      ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+      0.37
+    ),
   },
 ] as const;
 
@@ -129,8 +130,11 @@ const money = (v: number) => `${v.toLocaleString("ru-RU")} ₽`;
 function RevenueChart() {
   const [period, setPeriod] = useState<(typeof revenuePeriods)[number]["key"]>("week");
   const current = revenuePeriods.find((p) => p.key === period)!;
-  const max = Math.max(...current.bars.map((b) => b.value));
-  const total = current.bars.reduce((s, b) => s + b.value, 0);
+  const totals = current.bars.map((b) => b.cash + b.acquiring);
+  const max = Math.max(...totals);
+  const cashTotal = current.bars.reduce((s, b) => s + b.cash, 0);
+  const acquiringTotal = current.bars.reduce((s, b) => s + b.acquiring, 0);
+  const total = cashTotal + acquiringTotal;
 
   return (
     <Card>
@@ -143,6 +147,15 @@ function RevenueChart() {
           <p className="text-base font-semibold">{money(total)}</p>
           <p className="text-[11px] text-muted-foreground">за период</p>
         </div>
+      </div>
+
+      <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-muted-foreground">
+        <span className="flex items-center gap-1.5">
+          <span className="size-2 rounded-full bg-primary" /> Наличные · {money(cashTotal)}
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="size-2 rounded-full bg-info" /> Эквайринг · {money(acquiringTotal)}
+        </span>
       </div>
 
       <div className="mt-3 flex gap-1.5 overflow-x-auto pb-1">
@@ -172,13 +185,26 @@ function RevenueChart() {
             <div key={b.label} className="flex min-w-0 flex-1 flex-col items-center gap-1.5">
               {!dense && (
                 <span className="text-[9px] text-muted-foreground">
-                  {Math.round(b.value / 1000)}к
+                  {Math.round((b.cash + b.acquiring) / 1000)}к
                 </span>
               )}
               <div
-                className={`w-full ${dense ? "rounded-t-sm" : "rounded-t-lg"} ${b.value === 0 ? "bg-border" : "bg-primary/85"}`}
-                style={{ height: `${Math.max(4, (b.value / max) * 118)}px` }}
-              />
+                className={`flex w-full flex-col-reverse overflow-hidden ${dense ? "rounded-t-sm" : "rounded-t-lg"} ${b.future ? "bg-border" : "bg-secondary"}`}
+                style={{ height: `${Math.max(4, ((b.cash + b.acquiring) / max) * 118)}px` }}
+              >
+                {!b.future && (
+                  <>
+                    <span
+                      className="block w-full bg-primary"
+                      style={{ height: `${(b.cash / (b.cash + b.acquiring)) * 100}%` }}
+                    />
+                    <span
+                      className="block w-full bg-info"
+                      style={{ height: `${(b.acquiring / (b.cash + b.acquiring)) * 100}%` }}
+                    />
+                  </>
+                )}
+              </div>
               <span className="text-[10px] text-muted-foreground">
                 {showLabel ? b.label : ""}
               </span>

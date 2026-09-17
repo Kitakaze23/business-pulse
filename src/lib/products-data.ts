@@ -48,7 +48,7 @@ export const products: Product[] = [
     status: "recommended",
     cta: "Запустить рекламу",
     reason:
-      "По данным Бизнес Пульс темп привлечения новых клиентов замедлился. Реклама на целевую аудиторию рядом с точкой может вернуть рост.",
+      "По данным Отраслевой банк темп привлечения новых клиентов замедлился. Реклама на целевую аудиторию рядом с точкой может вернуть рост.",
     price: "от 10 000 ₽ за кампанию",
     benefits: [
       "Определение целевой аудитории и сегментов",
@@ -278,7 +278,7 @@ export const products: Product[] = [
 
 export const byId = (id: string) => products.find((p) => p.id === id);
 
-/** Демонстрационные сценарии персонализации витрины Бизнес Пульс. */
+/** Демонстрационные сценарии персонализации витрины Отраслевой банк. */
 export type PulseScenario = {
   id: string;
   name: string;
@@ -350,5 +350,5 @@ export const launchStages: { title: string; productIds: string[]; extra?: string
   { title: "Подготовить бизнес", productIds: ["account", "card", "accounting"] },
   { title: "Подготовить продажи", productIds: ["acquiring", "sbp", "kassa"] },
   { title: "Найти клиентов", productIds: ["location", "target"], extra: ["Целевая аудитория"] },
-  { title: "Начать продавать", productIds: [], extra: ["Первая продажа", "Первые 10 клиентов", "Бизнес Пульс"] },
+  { title: "Начать продавать", productIds: [], extra: ["Первая продажа", "Первые 10 клиентов", "Отраслевой банк"] },
 ];

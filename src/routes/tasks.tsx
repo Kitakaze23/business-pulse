@@ -16,7 +16,7 @@ export const Route = createFileRoute("/tasks")({
         content:
           "Выберите задачу бизнеса и получите диагностику, рекомендации и подходящие сервисы для её решения.",
       },
-      { property: "og:title", content: "Мои задачи — Бизнес Пульс" },
+      { property: "og:title", content: "Мои задачи — Отраслевой банк" },
       {
         property: "og:description",
         content: "Задача → диагностика → рекомендации → сервисы → действие.",

@@ -654,7 +654,7 @@ export function BusinessLaunch({
               <Activity className="size-5" />
             </span>
             <div className="flex-1">
-              <h3 className="text-base font-semibold leading-snug">Бизнес Пульс формируется</h3>
+              <h3 className="text-base font-semibold leading-snug">Отраслевой банк формируется</h3>
               <p className="mt-1 text-xs text-muted-foreground">
                 {pulseProgress >= 100
                   ? "У нас уже достаточно данных, чтобы оценивать состояние бизнеса."
@@ -669,10 +669,10 @@ export function BusinessLaunch({
             />
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            {pulseProgress >= 100 ? "Бизнес Пульс 82" : `${pulseProgress}% до формирования Бизнес Пульс`}
+            {pulseProgress >= 100 ? "Отраслевой банк 82" : `${pulseProgress}% до формирования Отраслевой банк`}
           </p>
           <CTA variant={pulseProgress >= 100 ? "primary" : "ghost"} onClick={onGoToPulse}>
-            Перейти в Бизнес Пульс
+            Перейти в Отраслевой банк
           </CTA>
         </Card>
       </div>

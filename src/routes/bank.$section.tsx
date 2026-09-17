@@ -7,12 +7,12 @@ export const Route = createFileRoute("/bank/$section")({
   component: BankSection,
   head: () => ({
     meta: [
-      { title: "Банковский раздел — Бизнес Пульс" },
+      { title: "Банковский раздел — Отраслевой банк" },
       {
         name: "description",
         content: "Детали банковского раздела: доступные операции и состояние по счету бизнеса.",
       },
-      { property: "og:title", content: "Банковский раздел — Бизнес Пульс" },
+      { property: "og:title", content: "Банковский раздел — Отраслевой банк" },
       {
         property: "og:description",
         content: "Операции, состояние и настройки банковского сервиса.",
