@@ -18,8 +18,8 @@ export function Splash() {
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-1 bg-background px-8 text-center animate-in fade-in duration-300">
-      <img src={logo} alt="Бизнес Пульс" width={180} height={180} className="size-[180px]" />
-      <h1 className="mt-4 text-2xl font-bold tracking-tight">Бизнес Пульс</h1>
+      <img src={logo} alt="Отраслевой банк" width={180} height={180} className="size-[180px]" />
+      <h1 className="mt-4 text-2xl font-bold tracking-tight">Отраслевой банк</h1>
       <p className="text-sm text-muted-foreground">Управление бизнесом.</p>
       <p className="mt-6 text-sm font-medium text-primary">
         Добрый день, Григорий Александрович

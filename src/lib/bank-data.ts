@@ -248,3 +248,107 @@ export const allBankItems: BankItem[] = bankGroups.flatMap((g) => g.items);
 export function findBankItem(id: string) {
   return allBankItems.find((i) => i.id === id);
 }
+
+
+export type OperationPurpose = "all" | "payments" | "transfers" | "taxes" | "credits" | "acquiring";
+export type OperationPeriod = "today" | "week" | "month" | "quarter";
+
+export const operationPeriods: { id: OperationPeriod; label: string }[] = [
+  { id: "today", label: "Сегодня" },
+  { id: "week", label: "Неделя" },
+  { id: "month", label: "Месяц" },
+  { id: "quarter", label: "Квартал" },
+];
+
+export const operationPurposes: { id: OperationPurpose; label: string }[] = [
+  { id: "all", label: "Все" },
+  { id: "payments", label: "Оплаты" },
+  { id: "transfers", label: "Переводы" },
+  { id: "taxes", label: "Налоги" },
+  { id: "credits", label: "Кредиты" },
+  { id: "acquiring", label: "Эквайринг" },
+];
+
+export type AccountOperation = {
+  id: string;
+  date: string;
+  time: string;
+  title: string;
+  purpose: Exclude<OperationPurpose, "all">;
+  amount: number;
+  period: OperationPeriod[];
+  status: string;
+};
+
+export const accountOperations: AccountOperation[] = [
+  {
+    id: "op-1",
+    date: "17 сен",
+    time: "14:20",
+    title: "Оплата от покупателя · СБП",
+    purpose: "acquiring",
+    amount: 4250,
+    period: ["today", "week", "month", "quarter"],
+    status: "Зачислено",
+  },
+  {
+    id: "op-2",
+    date: "17 сен",
+    time: "11:05",
+    title: "Платеж поставщику · ООО «Альфа»",
+    purpose: "payments",
+    amount: -38600,
+    period: ["today", "week", "month", "quarter"],
+    status: "Исполнено",
+  },
+  {
+    id: "op-3",
+    date: "16 сен",
+    time: "18:42",
+    title: "Перевод между счетами",
+    purpose: "transfers",
+    amount: -75000,
+    period: ["week", "month", "quarter"],
+    status: "Исполнено",
+  },
+  {
+    id: "op-4",
+    date: "15 сен",
+    time: "09:10",
+    title: "Налог УСН · авансовый платеж",
+    purpose: "taxes",
+    amount: -38400,
+    period: ["week", "month", "quarter"],
+    status: "Исполнено",
+  },
+  {
+    id: "op-5",
+    date: "12 сен",
+    time: "16:35",
+    title: "Эквайринг · торговая точка",
+    purpose: "acquiring",
+    amount: 128700,
+    period: ["month", "quarter"],
+    status: "Зачислено",
+  },
+  {
+    id: "op-6",
+    date: "8 сен",
+    time: "12:18",
+    title: "Погашение процентов по кредиту",
+    purpose: "credits",
+    amount: -16400,
+    period: ["month", "quarter"],
+    status: "Исполнено",
+  },
+  {
+    id: "op-7",
+    date: "29 авг",
+    time: "10:00",
+    title: "Регулярный платеж · аренда",
+    purpose: "payments",
+    amount: -120000,
+    period: ["quarter"],
+    status: "Исполнено",
+  },
+];
