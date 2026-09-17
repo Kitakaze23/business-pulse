@@ -41,7 +41,7 @@ function Bank() {
     { id: "mall", label: "ТЦ «Галерея» · 2 этаж" },
     { id: "market", label: "Маркетплейс · онлайн" },
   ];
-  const outletLabel = outlets.find((o) => o.id === outlet)?.label ?? outlets[0]!.label;
+  const outletLabel = outlets.find((o) => o.id === outlet)?.label ?? "Основная точка · ул. Ленина, 12";
 
   return (
     <PhoneShell>
