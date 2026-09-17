@@ -3,7 +3,8 @@ import { Bell, ChevronRight, UserRound, Compass, Lock } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const LAUNCH_MODE_KEY = "bp-launch-mode";
-import { PhoneShell, ScreenHeader, Card } from "@/components/PhoneShell";
+import { PhoneShell, Card } from "@/components/PhoneShell";
+import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
 import { BusinessLaunch } from "@/components/BusinessLaunch";
@@ -134,30 +135,35 @@ function Index() {
 
   const launchSwitch = (
     <button
-        type="button"
-        role="switch"
-        aria-checked={launchMode}
-        aria-label="Новый бизнес"
-        onClick={() => setLaunchMode((v) => !v)}
-        className="flex items-center gap-2"
+      type="button"
+      role="switch"
+      aria-checked={launchMode}
+      aria-label="Новый бизнес"
+      onClick={() => setLaunchMode((v) => !v)}
+      className="flex items-center gap-2"
+    >
+      <span className="text-[11px] leading-tight text-muted-foreground">
+        Новый
+        <br />
+        бизнес
+      </span>
+      <span
+        className={`relative h-5 w-9 rounded-full transition-colors ${
+          launchMode ? "bg-primary" : "bg-secondary"
+        }`}
       >
-        <span className="text-[11px] leading-tight text-muted-foreground">
-          Новый
-          <br />
-          бизнес
-        </span>
         <span
-          className={`relative h-5 w-9 rounded-full transition-colors ${
-            launchMode ? "bg-primary" : "bg-secondary"
+          className={`absolute top-0.5 size-4 rounded-full bg-card shadow-card transition-all ${
+            launchMode ? "left-[18px]" : "left-0.5"
           }`}
-        >
-          <span
-            className={`absolute top-0.5 size-4 rounded-full bg-card shadow-card transition-all ${
-              launchMode ? "left-[18px]" : "left-0.5"
-            }`}
-          />
-        </span>
-      </button>
+        />
+      </span>
+    </button>
+  );
+
+  const headerRight = (
+    <span className="flex items-center gap-3">
+      {launchSwitch}
       <Link to="/notifications" aria-label="Уведомления" className="relative">
         <Bell className="size-5 text-foreground" />
         <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-danger" />
@@ -183,7 +189,7 @@ function Index() {
   return (
     <PhoneShell>
       <div className="animate-in fade-in pb-24 duration-300">
-      <ScreenHeader title="Бизнес Пульс" subtitle={pulse.updated} right={headerRight} />
+      <AppHeader rightExtra={launchSwitch} />
 
       <div className="space-y-3 p-4">
         <Card className="py-6">
