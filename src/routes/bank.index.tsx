@@ -17,6 +17,7 @@ import { PhoneShell, Card } from "@/components/PhoneShell";
 import { AppHeader } from "@/components/AppHeader";
 import { TabBar } from "@/components/TabBar";
 import { ChatFab } from "@/components/ChatFab";
+import { PullerFab } from "@/components/PullerFab";
 import {
   bankAccount,
   bankGroups,
@@ -319,6 +320,7 @@ function Bank() {
         </div>
       )}
 
+      <PullerFab />
       <ChatFab />
       <TabBar active="/bank" />
     </PhoneShell>

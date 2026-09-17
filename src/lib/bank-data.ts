@@ -41,6 +41,8 @@ export const quickActionCatalog: QuickAction[] = [
 
 export const defaultQuickActions = ["payment", "transfer", "qr", "statement"];
 
+export const QUICK_ACTIONS_KEY = "bp-bank-quick-actions";
+
 export type BankItem = {
   id: string;
   title: string;
