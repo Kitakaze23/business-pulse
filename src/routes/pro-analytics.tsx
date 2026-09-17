@@ -9,13 +9,13 @@ export const Route = createFileRoute("/pro-analytics")({
   component: ProAnalytics,
   head: () => ({
     meta: [
-      { title: "Детальная аналитика — Бизнес Пульс" },
+      { title: "Детальная аналитика — Отраслевой банк" },
       {
         name: "description",
         content:
           "Детальная аналитика доходов, расходов, клиентов и конкурентов доступна при подключении Сбер Прайм.",
       },
-      { property: "og:title", content: "Детальная аналитика — Бизнес Пульс" },
+      { property: "og:title", content: "Детальная аналитика — Отраслевой банк" },
       {
         property: "og:description",
         content: "Доходы, расходы, клиенты и данные по конкурентам в одном разделе.",
