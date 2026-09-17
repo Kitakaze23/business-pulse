@@ -36,8 +36,6 @@ export const Route = createFileRoute("/bank/")({
 });
 
 function Bank() {
-  const [quick, setQuick] = useState<string[]>(defaultQuickActions);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const [outlet, setOutlet] = useState("main");
 
   const outlets = [
@@ -46,26 +44,6 @@ function Bank() {
     { id: "market", label: "Маркетплейс · онлайн" },
   ];
   const outletLabel = outlets.find((o) => o.id === outlet)?.label ?? outlets[0]!.label;
-
-  useEffect(() => {
-    const raw = localStorage.getItem(QUICK_KEY);
-    if (!raw) return;
-    try {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.every((x) => typeof x === "string")) setQuick(parsed);
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
-  const save = (next: string[]) => {
-    setQuick(next);
-    localStorage.setItem(QUICK_KEY, JSON.stringify(next));
-  };
-
-  const quickItems = quick
-    .map((id) => quickActionCatalog.find((a) => a.id === id))
-    .filter((a): a is (typeof quickActionCatalog)[number] => Boolean(a));
 
   return (
     <PhoneShell>
