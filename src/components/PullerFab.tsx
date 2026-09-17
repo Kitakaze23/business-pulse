@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Check, Plus, Settings2, X, Zap } from "lucide-react";
+import { Check, Home, Plus, Settings2, X, Zap } from "lucide-react";
 import {
   QUICK_ACTIONS_KEY,
   defaultQuickActions,
@@ -47,7 +47,7 @@ export function PullerFab() {
           aria-label="Быстрые действия"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="pointer-events-auto absolute bottom-[78px] left-4 flex size-12 items-center justify-center rounded-full bg-card text-primary shadow-lg shadow-foreground/10 ring-1 ring-border transition-transform active:scale-95"
+          className="pointer-events-auto absolute bottom-[78px] right-4 flex size-12 items-center justify-center rounded-full bg-card text-primary shadow-lg shadow-foreground/10 ring-1 ring-border transition-transform active:scale-95"
         >
           <Zap className="size-5" />
         </button>
@@ -77,6 +77,16 @@ export function PullerFab() {
               </button>
             </div>
             <div className="mt-4 grid grid-cols-4 gap-2">
+              <Link
+                to="/"
+                onClick={() => setOpen(false)}
+                className="flex flex-col items-center gap-1.5 text-center"
+              >
+                <span className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <Home className="size-5" />
+                </span>
+                <span className="text-[10px] leading-tight text-muted-foreground">На главную</span>
+              </Link>
               {quickItems.map(({ id, label, Icon, target }) => (
                 <Link
                   key={id}

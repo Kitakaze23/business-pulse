@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Splash } from "../components/Splash";
+import { PullerFab } from "../components/PullerFab";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -128,6 +129,7 @@ function RootComponent() {
       <Splash />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <PullerFab />
     </QueryClientProvider>
   );
 }
