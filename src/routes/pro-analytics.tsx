@@ -167,7 +167,7 @@ function RevenueChart() {
             </span>
             <div
               className="w-full rounded-t-lg bg-primary/85"
-              style={{ height: `${Math.max(6, (b.value / max) * 100)}%` }}
+              style={{ height: `${Math.max(8, (b.value / max) * 118)}px` }}
             />
             <span className="text-[10px] text-muted-foreground">{b.label}</span>
           </div>
